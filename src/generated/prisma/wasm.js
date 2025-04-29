@@ -119,8 +119,17 @@ exports.Prisma.RecipeScalarFieldEnum = {
   title: 'title',
   author: 'author',
   instructions: 'instructions',
-  ingredients: 'ingredients',
   rating: 'rating',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.IngredientScalarFieldEnum = {
+  id: 'id',
+  quantity: 'quantity',
+  unit: 'unit',
+  name: 'name',
+  recipeId: 'recipeId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -132,7 +141,8 @@ exports.Prisma.SortOrder = {
 
 
 exports.Prisma.ModelName = {
-  Recipe: 'Recipe'
+  Recipe: 'Recipe',
+  Ingredient: 'Ingredient'
 };
 
 /**

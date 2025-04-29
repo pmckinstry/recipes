@@ -1,65 +1,88 @@
 'use server';
 
 import { prisma } from '@/lib/db';
-import { Recipe } from '@/types/recipe';
+import { Recipe, Ingredient } from '@/types/recipe';
 
 export async function getRecipes() {
   const recipes = await prisma.recipe.findMany({
+    include: {
+      ingredients: true
+    },
     orderBy: {
       createdAt: 'desc',
     },
   });
 
-  return recipes.map(recipe => ({
-    ...recipe,
-    ingredients: JSON.parse(recipe.ingredients),
-  }));
+  return recipes;
 }
 
 export async function getRecipe(id: string) {
   const recipe = await prisma.recipe.findUnique({
     where: { id },
+    include: {
+      ingredients: true
+    }
   });
 
-  if (!recipe) return null;
-
-  return {
-    ...recipe,
-    ingredients: JSON.parse(recipe.ingredients),
-  };
+  return recipe;
 }
 
-export async function createRecipe(recipe: Omit<Recipe, 'id'>) {
+export async function createRecipe(recipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>) {
   const newRecipe = await prisma.recipe.create({
     data: {
-      ...recipe,
-      ingredients: JSON.stringify(recipe.ingredients),
+      title: recipe.title,
+      author: recipe.author,
+      instructions: recipe.instructions,
+      rating: recipe.rating,
+      ingredients: {
+        create: recipe.ingredients.map(ingredient => ({
+          quantity: ingredient.quantity,
+          unit: ingredient.unit,
+          name: ingredient.name
+        }))
+      }
     },
+    include: {
+      ingredients: true
+    }
   });
 
-  return {
-    ...newRecipe,
-    ingredients: JSON.parse(newRecipe.ingredients),
-  };
+  return newRecipe;
 }
 
-export async function updateRecipe(id: string, recipe: Partial<Omit<Recipe, 'id'>>) {
+export async function updateRecipe(id: string, recipe: Partial<Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>>) {
+  // First, delete all existing ingredients
+  await prisma.ingredient.deleteMany({
+    where: { recipeId: id }
+  });
+
+  // Then update the recipe and create new ingredients
   const updatedRecipe = await prisma.recipe.update({
     where: { id },
     data: {
-      ...recipe,
-      ingredients: recipe.ingredients ? JSON.stringify(recipe.ingredients) : undefined,
+      title: recipe.title,
+      author: recipe.author,
+      instructions: recipe.instructions,
+      rating: recipe.rating,
+      ingredients: {
+        create: recipe.ingredients?.map(ingredient => ({
+          quantity: ingredient.quantity,
+          unit: ingredient.unit,
+          name: ingredient.name
+        })) || []
+      }
     },
+    include: {
+      ingredients: true
+    }
   });
 
-  return {
-    ...updatedRecipe,
-    ingredients: JSON.parse(updatedRecipe.ingredients),
-  };
+  return updatedRecipe;
 }
 
 export async function deleteRecipe(id: string) {
+  // The cascade delete will handle removing the ingredients
   await prisma.recipe.delete({
-    where: { id },
+    where: { id }
   });
 } 

@@ -50,7 +50,7 @@ export default function RecipesPage() {
   return (
     <MainContent>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold">Recipes</h1>
+        <h1 className="text-4xl font-bold text-gray-900">Recipes</h1>
         <Link
           href="/recipes/new"
           className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
@@ -63,7 +63,7 @@ export default function RecipesPage() {
           <div key={recipe.id} className="relative">
             <Link href={`/recipes/${recipe.id}`} className="block">
               <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h2 className="text-xl font-bold mb-2">{recipe.title}</h2>
+                <h2 className="text-xl font-bold mb-2 text-gray-900">{recipe.title}</h2>
                 <p className="text-gray-600">By {recipe.author}</p>
                 <div className="flex items-center mt-2">
                   <span className="text-yellow-500">★</span>

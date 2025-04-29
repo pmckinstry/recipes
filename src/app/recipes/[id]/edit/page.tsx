@@ -74,7 +74,7 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
   return (
     <MainContent>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold">Edit Recipe</h1>
+        <h1 className="text-4xl font-bold text-gray-900">Edit Recipe</h1>
         <Link
           href={`/recipes/${id}`}
           className="text-indigo-600 hover:text-indigo-800"

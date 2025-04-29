@@ -77,7 +77,7 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
     <MainContent>
       <div className="max-w-2xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold">Delete Recipe</h1>
+          <h1 className="text-4xl font-bold text-gray-900">Delete Recipe</h1>
           <Link
             href={`/recipes/${id}`}
             className="text-indigo-600 hover:text-indigo-800"
@@ -87,7 +87,7 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-4">{recipe.title}</h2>
+          <h2 className="text-2xl font-bold mb-4 text-gray-900">{recipe.title}</h2>
           <p className="text-gray-600 mb-4">By {recipe.author}</p>
           <p className="text-red-600 mb-6">
             Are you sure you want to delete this recipe? This action cannot be undone.

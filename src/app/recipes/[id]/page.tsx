@@ -64,7 +64,7 @@ export default function ShowRecipePage({ params }: ShowRecipePageProps) {
     <MainContent>
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold">{recipe.title}</h1>
+          <h1 className="text-4xl font-bold text-gray-900">{recipe.title}</h1>
           <div className="space-x-4">
             <Link
               href="/recipes"
@@ -89,21 +89,23 @@ export default function ShowRecipePage({ params }: ShowRecipePageProps) {
 
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">Author</h2>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">Author</h2>
             <p className="text-gray-600">{recipe.author}</p>
           </div>
 
           <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">Ingredients</h2>
-            <ul className="list-disc list-inside text-gray-600">
-              {recipe.ingredients.map((ingredient, index) => (
-                <li key={index}>{ingredient}</li>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">Ingredients</h2>
+            <ul className="space-y-2">
+              {recipe.ingredients.map((ingredient) => (
+                <li key={ingredient.id} className="text-gray-600">
+                  {ingredient.quantity} {ingredient.unit} {ingredient.name}
+                </li>
               ))}
             </ul>
           </div>
 
           <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">Instructions</h2>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">Instructions</h2>
             <div className="prose max-w-none">
               {recipe.instructions.split('\n').map((step, index) => (
                 <p key={index} className="text-gray-600 mb-2">
@@ -114,7 +116,7 @@ export default function ShowRecipePage({ params }: ShowRecipePageProps) {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold mb-2">Rating</h2>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">Rating</h2>
             <div className="flex items-center">
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
