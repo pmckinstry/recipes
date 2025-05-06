@@ -7,13 +7,37 @@ import { useState, useEffect, use } from 'react';
 import { getRecipe } from '@/app/actions';
 import MainContent from '@/components/MainContent';
 
-interface ShowRecipePageProps {
+// Common fractions and their decimal values
+const COMMON_FRACTIONS: { [key: number]: string } = {
+  0.25: '1/4',
+  0.5: '1/2',
+  0.75: '3/4',
+  0.333: '1/3',
+  0.666: '2/3',
+  0.125: '1/8',
+  0.375: '3/8',
+  0.625: '5/8',
+  0.875: '7/8',
+};
+
+const decimalToFraction = (value: number): string => {
+  // Check if it's a common fraction
+  const rounded = Math.round(value * 1000) / 1000;
+  if (COMMON_FRACTIONS[rounded]) {
+    return COMMON_FRACTIONS[rounded];
+  }
+  
+  // If not a common fraction, return the decimal as a string
+  return value.toString();
+};
+
+interface RecipePageProps {
   params: Promise<{
     id: string;
   }>;
 }
 
-export default function ShowRecipePage({ params }: ShowRecipePageProps) {
+export default function RecipePage({ params }: RecipePageProps) {
   const router = useRouter();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
@@ -98,7 +122,7 @@ export default function ShowRecipePage({ params }: ShowRecipePageProps) {
             <ul className="space-y-2">
               {recipe.ingredients.map((ingredient) => (
                 <li key={ingredient.id} className="text-gray-600">
-                  {ingredient.quantity} {ingredient.unit} {ingredient.name}
+                  {decimalToFraction(ingredient.quantity)} {ingredient.unit} {ingredient.name}
                 </li>
               ))}
             </ul>
