@@ -2,11 +2,21 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export default function TopNav() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isActive = (path: string) => {
+    // Only show active state after component is mounted (client-side)
+    if (!mounted) {
+      return 'text-gray-600 hover:text-indigo-600';
+    }
     return pathname === path ? 'text-indigo-600' : 'text-gray-600 hover:text-indigo-600';
   };
 
