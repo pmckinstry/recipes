@@ -52,7 +52,11 @@ npx prisma migrate dev
 npx prisma db seed
 ```
 
-5. Run the development server:
+5. Generate the Prisma client:
+```bash
+npx prisma generate
+```
+6. Run the development server:
 ```bash
 npm run dev
 ```
