@@ -32,7 +32,11 @@ npm install
 ```
 
 3. Set up environment variables:
-Create a `.env.local` file in the root directory with:
+Copy the example file and adjust the values:
+```bash
+cp .env.example .env.local
+```
+`.env.example` contains all required environment variables:
 ```env
 # Database
 DATABASE_URL="file:./dev.db"
