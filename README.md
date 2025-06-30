@@ -51,6 +51,7 @@ GOOGLE_CLIENT_SECRET="your-google-client-secret"
 npx prisma migrate dev
 npx prisma db seed
 ```
+These commands will generate a local SQLite database at `prisma/dev.db`, which is not tracked in version control.
 
 5. Generate the Prisma client:
 ```bash
