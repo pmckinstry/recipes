@@ -70,6 +70,7 @@ model Recipe {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   ingredients Ingredient[]
+  labels      RecipeLabel[]
 }
 
 model Ingredient {
@@ -81,4 +82,24 @@ model Ingredient {
   recipe      Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Label {
+  id        String        @id @default(uuid())
+  name      String        @unique
+  color     String        @default("#3B82F6")
+  recipes   RecipeLabel[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model RecipeLabel {
+  id       String @id @default(uuid())
+  recipeId String
+  labelId  String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  label    Label  @relation(fields: [labelId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([recipeId, labelId])
 }

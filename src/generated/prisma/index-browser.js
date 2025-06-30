@@ -174,6 +174,21 @@ exports.Prisma.IngredientScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.LabelScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RecipeLabelScalarFieldEnum = {
+  id: 'id',
+  recipeId: 'recipeId',
+  labelId: 'labelId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -191,7 +206,9 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   Recipe: 'Recipe',
-  Ingredient: 'Ingredient'
+  Ingredient: 'Ingredient',
+  Label: 'Label',
+  RecipeLabel: 'RecipeLabel'
 };
 
 /**

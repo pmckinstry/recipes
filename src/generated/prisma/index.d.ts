@@ -43,6 +43,16 @@ export type Recipe = $Result.DefaultSelection<Prisma.$RecipePayload>
  * 
  */
 export type Ingredient = $Result.DefaultSelection<Prisma.$IngredientPayload>
+/**
+ * Model Label
+ * 
+ */
+export type Label = $Result.DefaultSelection<Prisma.$LabelPayload>
+/**
+ * Model RecipeLabel
+ * 
+ */
+export type RecipeLabel = $Result.DefaultSelection<Prisma.$RecipeLabelPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -228,6 +238,26 @@ export class PrismaClient<
     * ```
     */
   get ingredient(): Prisma.IngredientDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.label`: Exposes CRUD operations for the **Label** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Labels
+    * const labels = await prisma.label.findMany()
+    * ```
+    */
+  get label(): Prisma.LabelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.recipeLabel`: Exposes CRUD operations for the **RecipeLabel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RecipeLabels
+    * const recipeLabels = await prisma.recipeLabel.findMany()
+    * ```
+    */
+  get recipeLabel(): Prisma.RecipeLabelDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -673,7 +703,9 @@ export namespace Prisma {
     Session: 'Session',
     VerificationToken: 'VerificationToken',
     Recipe: 'Recipe',
-    Ingredient: 'Ingredient'
+    Ingredient: 'Ingredient',
+    Label: 'Label',
+    RecipeLabel: 'RecipeLabel'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -692,7 +724,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "recipe" | "ingredient"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "recipe" | "ingredient" | "label" | "recipeLabel"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1140,6 +1172,154 @@ export namespace Prisma {
           }
         }
       }
+      Label: {
+        payload: Prisma.$LabelPayload<ExtArgs>
+        fields: Prisma.LabelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LabelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LabelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload>
+          }
+          findFirst: {
+            args: Prisma.LabelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LabelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload>
+          }
+          findMany: {
+            args: Prisma.LabelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload>[]
+          }
+          create: {
+            args: Prisma.LabelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload>
+          }
+          createMany: {
+            args: Prisma.LabelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LabelCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload>[]
+          }
+          delete: {
+            args: Prisma.LabelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload>
+          }
+          update: {
+            args: Prisma.LabelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload>
+          }
+          deleteMany: {
+            args: Prisma.LabelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LabelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LabelUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload>[]
+          }
+          upsert: {
+            args: Prisma.LabelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LabelPayload>
+          }
+          aggregate: {
+            args: Prisma.LabelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLabel>
+          }
+          groupBy: {
+            args: Prisma.LabelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LabelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LabelCountArgs<ExtArgs>
+            result: $Utils.Optional<LabelCountAggregateOutputType> | number
+          }
+        }
+      }
+      RecipeLabel: {
+        payload: Prisma.$RecipeLabelPayload<ExtArgs>
+        fields: Prisma.RecipeLabelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RecipeLabelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RecipeLabelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload>
+          }
+          findFirst: {
+            args: Prisma.RecipeLabelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RecipeLabelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload>
+          }
+          findMany: {
+            args: Prisma.RecipeLabelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload>[]
+          }
+          create: {
+            args: Prisma.RecipeLabelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload>
+          }
+          createMany: {
+            args: Prisma.RecipeLabelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RecipeLabelCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload>[]
+          }
+          delete: {
+            args: Prisma.RecipeLabelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload>
+          }
+          update: {
+            args: Prisma.RecipeLabelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload>
+          }
+          deleteMany: {
+            args: Prisma.RecipeLabelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RecipeLabelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RecipeLabelUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload>[]
+          }
+          upsert: {
+            args: Prisma.RecipeLabelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecipeLabelPayload>
+          }
+          aggregate: {
+            args: Prisma.RecipeLabelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRecipeLabel>
+          }
+          groupBy: {
+            args: Prisma.RecipeLabelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RecipeLabelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RecipeLabelCountArgs<ExtArgs>
+            result: $Utils.Optional<RecipeLabelCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1230,6 +1410,8 @@ export namespace Prisma {
     verificationToken?: VerificationTokenOmit
     recipe?: RecipeOmit
     ingredient?: IngredientOmit
+    label?: LabelOmit
+    recipeLabel?: RecipeLabelOmit
   }
 
   /* Types for Logging */
@@ -1374,10 +1556,12 @@ export namespace Prisma {
 
   export type RecipeCountOutputType = {
     ingredients: number
+    labels: number
   }
 
   export type RecipeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingredients?: boolean | RecipeCountOutputTypeCountIngredientsArgs
+    labels?: boolean | RecipeCountOutputTypeCountLabelsArgs
   }
 
   // Custom InputTypes
@@ -1396,6 +1580,44 @@ export namespace Prisma {
    */
   export type RecipeCountOutputTypeCountIngredientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IngredientWhereInput
+  }
+
+  /**
+   * RecipeCountOutputType without action
+   */
+  export type RecipeCountOutputTypeCountLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecipeLabelWhereInput
+  }
+
+
+  /**
+   * Count Type LabelCountOutputType
+   */
+
+  export type LabelCountOutputType = {
+    recipes: number
+  }
+
+  export type LabelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    recipes?: boolean | LabelCountOutputTypeCountRecipesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LabelCountOutputType without action
+   */
+  export type LabelCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LabelCountOutputType
+     */
+    select?: LabelCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LabelCountOutputType without action
+   */
+  export type LabelCountOutputTypeCountRecipesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecipeLabelWhereInput
   }
 
 
@@ -5981,6 +6203,7 @@ export namespace Prisma {
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ingredients?: boolean | Recipe$ingredientsArgs<ExtArgs>
+    labels?: boolean | Recipe$labelsArgs<ExtArgs>
     _count?: boolean | RecipeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["recipe"]>
 
@@ -6023,6 +6246,7 @@ export namespace Prisma {
   export type RecipeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ingredients?: boolean | Recipe$ingredientsArgs<ExtArgs>
+    labels?: boolean | Recipe$labelsArgs<ExtArgs>
     _count?: boolean | RecipeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RecipeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6037,6 +6261,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       ingredients: Prisma.$IngredientPayload<ExtArgs>[]
+      labels: Prisma.$RecipeLabelPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6443,6 +6668,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     ingredients<T extends Recipe$ingredientsArgs<ExtArgs> = {}>(args?: Subset<T, Recipe$ingredientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    labels<T extends Recipe$labelsArgs<ExtArgs> = {}>(args?: Subset<T, Recipe$labelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6895,6 +7121,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: IngredientScalarFieldEnum | IngredientScalarFieldEnum[]
+  }
+
+  /**
+   * Recipe.labels
+   */
+  export type Recipe$labelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    where?: RecipeLabelWhereInput
+    orderBy?: RecipeLabelOrderByWithRelationInput | RecipeLabelOrderByWithRelationInput[]
+    cursor?: RecipeLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecipeLabelScalarFieldEnum | RecipeLabelScalarFieldEnum[]
   }
 
   /**
@@ -8033,6 +8283,2125 @@ export namespace Prisma {
 
 
   /**
+   * Model Label
+   */
+
+  export type AggregateLabel = {
+    _count: LabelCountAggregateOutputType | null
+    _min: LabelMinAggregateOutputType | null
+    _max: LabelMaxAggregateOutputType | null
+  }
+
+  export type LabelMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    color: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LabelMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    color: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LabelCountAggregateOutputType = {
+    id: number
+    name: number
+    color: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type LabelMinAggregateInputType = {
+    id?: true
+    name?: true
+    color?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LabelMaxAggregateInputType = {
+    id?: true
+    name?: true
+    color?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LabelCountAggregateInputType = {
+    id?: true
+    name?: true
+    color?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type LabelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Label to aggregate.
+     */
+    where?: LabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Labels to fetch.
+     */
+    orderBy?: LabelOrderByWithRelationInput | LabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Labels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Labels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Labels
+    **/
+    _count?: true | LabelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LabelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LabelMaxAggregateInputType
+  }
+
+  export type GetLabelAggregateType<T extends LabelAggregateArgs> = {
+        [P in keyof T & keyof AggregateLabel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLabel[P]>
+      : GetScalarType<T[P], AggregateLabel[P]>
+  }
+
+
+
+
+  export type LabelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LabelWhereInput
+    orderBy?: LabelOrderByWithAggregationInput | LabelOrderByWithAggregationInput[]
+    by: LabelScalarFieldEnum[] | LabelScalarFieldEnum
+    having?: LabelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LabelCountAggregateInputType | true
+    _min?: LabelMinAggregateInputType
+    _max?: LabelMaxAggregateInputType
+  }
+
+  export type LabelGroupByOutputType = {
+    id: string
+    name: string
+    color: string
+    createdAt: Date
+    updatedAt: Date
+    _count: LabelCountAggregateOutputType | null
+    _min: LabelMinAggregateOutputType | null
+    _max: LabelMaxAggregateOutputType | null
+  }
+
+  type GetLabelGroupByPayload<T extends LabelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LabelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LabelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LabelGroupByOutputType[P]>
+            : GetScalarType<T[P], LabelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LabelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    color?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    recipes?: boolean | Label$recipesArgs<ExtArgs>
+    _count?: boolean | LabelCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["label"]>
+
+  export type LabelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    color?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["label"]>
+
+  export type LabelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    color?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["label"]>
+
+  export type LabelSelectScalar = {
+    id?: boolean
+    name?: boolean
+    color?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type LabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "color" | "createdAt" | "updatedAt", ExtArgs["result"]["label"]>
+  export type LabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    recipes?: boolean | Label$recipesArgs<ExtArgs>
+    _count?: boolean | LabelCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LabelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type LabelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $LabelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Label"
+    objects: {
+      recipes: Prisma.$RecipeLabelPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      color: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["label"]>
+    composites: {}
+  }
+
+  type LabelGetPayload<S extends boolean | null | undefined | LabelDefaultArgs> = $Result.GetResult<Prisma.$LabelPayload, S>
+
+  type LabelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LabelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LabelCountAggregateInputType | true
+    }
+
+  export interface LabelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Label'], meta: { name: 'Label' } }
+    /**
+     * Find zero or one Label that matches the filter.
+     * @param {LabelFindUniqueArgs} args - Arguments to find a Label
+     * @example
+     * // Get one Label
+     * const label = await prisma.label.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LabelFindUniqueArgs>(args: SelectSubset<T, LabelFindUniqueArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Label that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LabelFindUniqueOrThrowArgs} args - Arguments to find a Label
+     * @example
+     * // Get one Label
+     * const label = await prisma.label.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LabelFindUniqueOrThrowArgs>(args: SelectSubset<T, LabelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Label that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LabelFindFirstArgs} args - Arguments to find a Label
+     * @example
+     * // Get one Label
+     * const label = await prisma.label.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LabelFindFirstArgs>(args?: SelectSubset<T, LabelFindFirstArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Label that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LabelFindFirstOrThrowArgs} args - Arguments to find a Label
+     * @example
+     * // Get one Label
+     * const label = await prisma.label.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LabelFindFirstOrThrowArgs>(args?: SelectSubset<T, LabelFindFirstOrThrowArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Labels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LabelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Labels
+     * const labels = await prisma.label.findMany()
+     * 
+     * // Get first 10 Labels
+     * const labels = await prisma.label.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const labelWithIdOnly = await prisma.label.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LabelFindManyArgs>(args?: SelectSubset<T, LabelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Label.
+     * @param {LabelCreateArgs} args - Arguments to create a Label.
+     * @example
+     * // Create one Label
+     * const Label = await prisma.label.create({
+     *   data: {
+     *     // ... data to create a Label
+     *   }
+     * })
+     * 
+     */
+    create<T extends LabelCreateArgs>(args: SelectSubset<T, LabelCreateArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Labels.
+     * @param {LabelCreateManyArgs} args - Arguments to create many Labels.
+     * @example
+     * // Create many Labels
+     * const label = await prisma.label.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LabelCreateManyArgs>(args?: SelectSubset<T, LabelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Labels and returns the data saved in the database.
+     * @param {LabelCreateManyAndReturnArgs} args - Arguments to create many Labels.
+     * @example
+     * // Create many Labels
+     * const label = await prisma.label.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Labels and only return the `id`
+     * const labelWithIdOnly = await prisma.label.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LabelCreateManyAndReturnArgs>(args?: SelectSubset<T, LabelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Label.
+     * @param {LabelDeleteArgs} args - Arguments to delete one Label.
+     * @example
+     * // Delete one Label
+     * const Label = await prisma.label.delete({
+     *   where: {
+     *     // ... filter to delete one Label
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LabelDeleteArgs>(args: SelectSubset<T, LabelDeleteArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Label.
+     * @param {LabelUpdateArgs} args - Arguments to update one Label.
+     * @example
+     * // Update one Label
+     * const label = await prisma.label.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LabelUpdateArgs>(args: SelectSubset<T, LabelUpdateArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Labels.
+     * @param {LabelDeleteManyArgs} args - Arguments to filter Labels to delete.
+     * @example
+     * // Delete a few Labels
+     * const { count } = await prisma.label.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LabelDeleteManyArgs>(args?: SelectSubset<T, LabelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Labels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LabelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Labels
+     * const label = await prisma.label.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LabelUpdateManyArgs>(args: SelectSubset<T, LabelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Labels and returns the data updated in the database.
+     * @param {LabelUpdateManyAndReturnArgs} args - Arguments to update many Labels.
+     * @example
+     * // Update many Labels
+     * const label = await prisma.label.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Labels and only return the `id`
+     * const labelWithIdOnly = await prisma.label.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LabelUpdateManyAndReturnArgs>(args: SelectSubset<T, LabelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Label.
+     * @param {LabelUpsertArgs} args - Arguments to update or create a Label.
+     * @example
+     * // Update or create a Label
+     * const label = await prisma.label.upsert({
+     *   create: {
+     *     // ... data to create a Label
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Label we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LabelUpsertArgs>(args: SelectSubset<T, LabelUpsertArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Labels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LabelCountArgs} args - Arguments to filter Labels to count.
+     * @example
+     * // Count the number of Labels
+     * const count = await prisma.label.count({
+     *   where: {
+     *     // ... the filter for the Labels we want to count
+     *   }
+     * })
+    **/
+    count<T extends LabelCountArgs>(
+      args?: Subset<T, LabelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LabelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Label.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LabelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LabelAggregateArgs>(args: Subset<T, LabelAggregateArgs>): Prisma.PrismaPromise<GetLabelAggregateType<T>>
+
+    /**
+     * Group by Label.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LabelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LabelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LabelGroupByArgs['orderBy'] }
+        : { orderBy?: LabelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LabelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLabelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Label model
+   */
+  readonly fields: LabelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Label.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LabelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    recipes<T extends Label$recipesArgs<ExtArgs> = {}>(args?: Subset<T, Label$recipesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Label model
+   */
+  interface LabelFieldRefs {
+    readonly id: FieldRef<"Label", 'String'>
+    readonly name: FieldRef<"Label", 'String'>
+    readonly color: FieldRef<"Label", 'String'>
+    readonly createdAt: FieldRef<"Label", 'DateTime'>
+    readonly updatedAt: FieldRef<"Label", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Label findUnique
+   */
+  export type LabelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    /**
+     * Filter, which Label to fetch.
+     */
+    where: LabelWhereUniqueInput
+  }
+
+  /**
+   * Label findUniqueOrThrow
+   */
+  export type LabelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    /**
+     * Filter, which Label to fetch.
+     */
+    where: LabelWhereUniqueInput
+  }
+
+  /**
+   * Label findFirst
+   */
+  export type LabelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    /**
+     * Filter, which Label to fetch.
+     */
+    where?: LabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Labels to fetch.
+     */
+    orderBy?: LabelOrderByWithRelationInput | LabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Labels.
+     */
+    cursor?: LabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Labels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Labels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Labels.
+     */
+    distinct?: LabelScalarFieldEnum | LabelScalarFieldEnum[]
+  }
+
+  /**
+   * Label findFirstOrThrow
+   */
+  export type LabelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    /**
+     * Filter, which Label to fetch.
+     */
+    where?: LabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Labels to fetch.
+     */
+    orderBy?: LabelOrderByWithRelationInput | LabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Labels.
+     */
+    cursor?: LabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Labels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Labels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Labels.
+     */
+    distinct?: LabelScalarFieldEnum | LabelScalarFieldEnum[]
+  }
+
+  /**
+   * Label findMany
+   */
+  export type LabelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    /**
+     * Filter, which Labels to fetch.
+     */
+    where?: LabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Labels to fetch.
+     */
+    orderBy?: LabelOrderByWithRelationInput | LabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Labels.
+     */
+    cursor?: LabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Labels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Labels.
+     */
+    skip?: number
+    distinct?: LabelScalarFieldEnum | LabelScalarFieldEnum[]
+  }
+
+  /**
+   * Label create
+   */
+  export type LabelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Label.
+     */
+    data: XOR<LabelCreateInput, LabelUncheckedCreateInput>
+  }
+
+  /**
+   * Label createMany
+   */
+  export type LabelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Labels.
+     */
+    data: LabelCreateManyInput | LabelCreateManyInput[]
+  }
+
+  /**
+   * Label createManyAndReturn
+   */
+  export type LabelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * The data used to create many Labels.
+     */
+    data: LabelCreateManyInput | LabelCreateManyInput[]
+  }
+
+  /**
+   * Label update
+   */
+  export type LabelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Label.
+     */
+    data: XOR<LabelUpdateInput, LabelUncheckedUpdateInput>
+    /**
+     * Choose, which Label to update.
+     */
+    where: LabelWhereUniqueInput
+  }
+
+  /**
+   * Label updateMany
+   */
+  export type LabelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Labels.
+     */
+    data: XOR<LabelUpdateManyMutationInput, LabelUncheckedUpdateManyInput>
+    /**
+     * Filter which Labels to update
+     */
+    where?: LabelWhereInput
+    /**
+     * Limit how many Labels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Label updateManyAndReturn
+   */
+  export type LabelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * The data used to update Labels.
+     */
+    data: XOR<LabelUpdateManyMutationInput, LabelUncheckedUpdateManyInput>
+    /**
+     * Filter which Labels to update
+     */
+    where?: LabelWhereInput
+    /**
+     * Limit how many Labels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Label upsert
+   */
+  export type LabelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Label to update in case it exists.
+     */
+    where: LabelWhereUniqueInput
+    /**
+     * In case the Label found by the `where` argument doesn't exist, create a new Label with this data.
+     */
+    create: XOR<LabelCreateInput, LabelUncheckedCreateInput>
+    /**
+     * In case the Label was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LabelUpdateInput, LabelUncheckedUpdateInput>
+  }
+
+  /**
+   * Label delete
+   */
+  export type LabelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    /**
+     * Filter which Label to delete.
+     */
+    where: LabelWhereUniqueInput
+  }
+
+  /**
+   * Label deleteMany
+   */
+  export type LabelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Labels to delete
+     */
+    where?: LabelWhereInput
+    /**
+     * Limit how many Labels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Label.recipes
+   */
+  export type Label$recipesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    where?: RecipeLabelWhereInput
+    orderBy?: RecipeLabelOrderByWithRelationInput | RecipeLabelOrderByWithRelationInput[]
+    cursor?: RecipeLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecipeLabelScalarFieldEnum | RecipeLabelScalarFieldEnum[]
+  }
+
+  /**
+   * Label without action
+   */
+  export type LabelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RecipeLabel
+   */
+
+  export type AggregateRecipeLabel = {
+    _count: RecipeLabelCountAggregateOutputType | null
+    _min: RecipeLabelMinAggregateOutputType | null
+    _max: RecipeLabelMaxAggregateOutputType | null
+  }
+
+  export type RecipeLabelMinAggregateOutputType = {
+    id: string | null
+    recipeId: string | null
+    labelId: string | null
+    createdAt: Date | null
+  }
+
+  export type RecipeLabelMaxAggregateOutputType = {
+    id: string | null
+    recipeId: string | null
+    labelId: string | null
+    createdAt: Date | null
+  }
+
+  export type RecipeLabelCountAggregateOutputType = {
+    id: number
+    recipeId: number
+    labelId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RecipeLabelMinAggregateInputType = {
+    id?: true
+    recipeId?: true
+    labelId?: true
+    createdAt?: true
+  }
+
+  export type RecipeLabelMaxAggregateInputType = {
+    id?: true
+    recipeId?: true
+    labelId?: true
+    createdAt?: true
+  }
+
+  export type RecipeLabelCountAggregateInputType = {
+    id?: true
+    recipeId?: true
+    labelId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RecipeLabelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RecipeLabel to aggregate.
+     */
+    where?: RecipeLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecipeLabels to fetch.
+     */
+    orderBy?: RecipeLabelOrderByWithRelationInput | RecipeLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RecipeLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecipeLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecipeLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RecipeLabels
+    **/
+    _count?: true | RecipeLabelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RecipeLabelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RecipeLabelMaxAggregateInputType
+  }
+
+  export type GetRecipeLabelAggregateType<T extends RecipeLabelAggregateArgs> = {
+        [P in keyof T & keyof AggregateRecipeLabel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRecipeLabel[P]>
+      : GetScalarType<T[P], AggregateRecipeLabel[P]>
+  }
+
+
+
+
+  export type RecipeLabelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecipeLabelWhereInput
+    orderBy?: RecipeLabelOrderByWithAggregationInput | RecipeLabelOrderByWithAggregationInput[]
+    by: RecipeLabelScalarFieldEnum[] | RecipeLabelScalarFieldEnum
+    having?: RecipeLabelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RecipeLabelCountAggregateInputType | true
+    _min?: RecipeLabelMinAggregateInputType
+    _max?: RecipeLabelMaxAggregateInputType
+  }
+
+  export type RecipeLabelGroupByOutputType = {
+    id: string
+    recipeId: string
+    labelId: string
+    createdAt: Date
+    _count: RecipeLabelCountAggregateOutputType | null
+    _min: RecipeLabelMinAggregateOutputType | null
+    _max: RecipeLabelMaxAggregateOutputType | null
+  }
+
+  type GetRecipeLabelGroupByPayload<T extends RecipeLabelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RecipeLabelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RecipeLabelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RecipeLabelGroupByOutputType[P]>
+            : GetScalarType<T[P], RecipeLabelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RecipeLabelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    recipeId?: boolean
+    labelId?: boolean
+    createdAt?: boolean
+    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recipeLabel"]>
+
+  export type RecipeLabelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    recipeId?: boolean
+    labelId?: boolean
+    createdAt?: boolean
+    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recipeLabel"]>
+
+  export type RecipeLabelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    recipeId?: boolean
+    labelId?: boolean
+    createdAt?: boolean
+    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recipeLabel"]>
+
+  export type RecipeLabelSelectScalar = {
+    id?: boolean
+    recipeId?: boolean
+    labelId?: boolean
+    createdAt?: boolean
+  }
+
+  export type RecipeLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recipeId" | "labelId" | "createdAt", ExtArgs["result"]["recipeLabel"]>
+  export type RecipeLabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }
+  export type RecipeLabelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }
+  export type RecipeLabelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }
+
+  export type $RecipeLabelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RecipeLabel"
+    objects: {
+      recipe: Prisma.$RecipePayload<ExtArgs>
+      label: Prisma.$LabelPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      recipeId: string
+      labelId: string
+      createdAt: Date
+    }, ExtArgs["result"]["recipeLabel"]>
+    composites: {}
+  }
+
+  type RecipeLabelGetPayload<S extends boolean | null | undefined | RecipeLabelDefaultArgs> = $Result.GetResult<Prisma.$RecipeLabelPayload, S>
+
+  type RecipeLabelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RecipeLabelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RecipeLabelCountAggregateInputType | true
+    }
+
+  export interface RecipeLabelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RecipeLabel'], meta: { name: 'RecipeLabel' } }
+    /**
+     * Find zero or one RecipeLabel that matches the filter.
+     * @param {RecipeLabelFindUniqueArgs} args - Arguments to find a RecipeLabel
+     * @example
+     * // Get one RecipeLabel
+     * const recipeLabel = await prisma.recipeLabel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RecipeLabelFindUniqueArgs>(args: SelectSubset<T, RecipeLabelFindUniqueArgs<ExtArgs>>): Prisma__RecipeLabelClient<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RecipeLabel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RecipeLabelFindUniqueOrThrowArgs} args - Arguments to find a RecipeLabel
+     * @example
+     * // Get one RecipeLabel
+     * const recipeLabel = await prisma.recipeLabel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RecipeLabelFindUniqueOrThrowArgs>(args: SelectSubset<T, RecipeLabelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RecipeLabelClient<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RecipeLabel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecipeLabelFindFirstArgs} args - Arguments to find a RecipeLabel
+     * @example
+     * // Get one RecipeLabel
+     * const recipeLabel = await prisma.recipeLabel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RecipeLabelFindFirstArgs>(args?: SelectSubset<T, RecipeLabelFindFirstArgs<ExtArgs>>): Prisma__RecipeLabelClient<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RecipeLabel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecipeLabelFindFirstOrThrowArgs} args - Arguments to find a RecipeLabel
+     * @example
+     * // Get one RecipeLabel
+     * const recipeLabel = await prisma.recipeLabel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RecipeLabelFindFirstOrThrowArgs>(args?: SelectSubset<T, RecipeLabelFindFirstOrThrowArgs<ExtArgs>>): Prisma__RecipeLabelClient<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RecipeLabels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecipeLabelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RecipeLabels
+     * const recipeLabels = await prisma.recipeLabel.findMany()
+     * 
+     * // Get first 10 RecipeLabels
+     * const recipeLabels = await prisma.recipeLabel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const recipeLabelWithIdOnly = await prisma.recipeLabel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RecipeLabelFindManyArgs>(args?: SelectSubset<T, RecipeLabelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RecipeLabel.
+     * @param {RecipeLabelCreateArgs} args - Arguments to create a RecipeLabel.
+     * @example
+     * // Create one RecipeLabel
+     * const RecipeLabel = await prisma.recipeLabel.create({
+     *   data: {
+     *     // ... data to create a RecipeLabel
+     *   }
+     * })
+     * 
+     */
+    create<T extends RecipeLabelCreateArgs>(args: SelectSubset<T, RecipeLabelCreateArgs<ExtArgs>>): Prisma__RecipeLabelClient<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RecipeLabels.
+     * @param {RecipeLabelCreateManyArgs} args - Arguments to create many RecipeLabels.
+     * @example
+     * // Create many RecipeLabels
+     * const recipeLabel = await prisma.recipeLabel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RecipeLabelCreateManyArgs>(args?: SelectSubset<T, RecipeLabelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RecipeLabels and returns the data saved in the database.
+     * @param {RecipeLabelCreateManyAndReturnArgs} args - Arguments to create many RecipeLabels.
+     * @example
+     * // Create many RecipeLabels
+     * const recipeLabel = await prisma.recipeLabel.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RecipeLabels and only return the `id`
+     * const recipeLabelWithIdOnly = await prisma.recipeLabel.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RecipeLabelCreateManyAndReturnArgs>(args?: SelectSubset<T, RecipeLabelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RecipeLabel.
+     * @param {RecipeLabelDeleteArgs} args - Arguments to delete one RecipeLabel.
+     * @example
+     * // Delete one RecipeLabel
+     * const RecipeLabel = await prisma.recipeLabel.delete({
+     *   where: {
+     *     // ... filter to delete one RecipeLabel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RecipeLabelDeleteArgs>(args: SelectSubset<T, RecipeLabelDeleteArgs<ExtArgs>>): Prisma__RecipeLabelClient<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RecipeLabel.
+     * @param {RecipeLabelUpdateArgs} args - Arguments to update one RecipeLabel.
+     * @example
+     * // Update one RecipeLabel
+     * const recipeLabel = await prisma.recipeLabel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RecipeLabelUpdateArgs>(args: SelectSubset<T, RecipeLabelUpdateArgs<ExtArgs>>): Prisma__RecipeLabelClient<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RecipeLabels.
+     * @param {RecipeLabelDeleteManyArgs} args - Arguments to filter RecipeLabels to delete.
+     * @example
+     * // Delete a few RecipeLabels
+     * const { count } = await prisma.recipeLabel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RecipeLabelDeleteManyArgs>(args?: SelectSubset<T, RecipeLabelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RecipeLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecipeLabelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RecipeLabels
+     * const recipeLabel = await prisma.recipeLabel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RecipeLabelUpdateManyArgs>(args: SelectSubset<T, RecipeLabelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RecipeLabels and returns the data updated in the database.
+     * @param {RecipeLabelUpdateManyAndReturnArgs} args - Arguments to update many RecipeLabels.
+     * @example
+     * // Update many RecipeLabels
+     * const recipeLabel = await prisma.recipeLabel.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RecipeLabels and only return the `id`
+     * const recipeLabelWithIdOnly = await prisma.recipeLabel.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RecipeLabelUpdateManyAndReturnArgs>(args: SelectSubset<T, RecipeLabelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RecipeLabel.
+     * @param {RecipeLabelUpsertArgs} args - Arguments to update or create a RecipeLabel.
+     * @example
+     * // Update or create a RecipeLabel
+     * const recipeLabel = await prisma.recipeLabel.upsert({
+     *   create: {
+     *     // ... data to create a RecipeLabel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RecipeLabel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RecipeLabelUpsertArgs>(args: SelectSubset<T, RecipeLabelUpsertArgs<ExtArgs>>): Prisma__RecipeLabelClient<$Result.GetResult<Prisma.$RecipeLabelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RecipeLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecipeLabelCountArgs} args - Arguments to filter RecipeLabels to count.
+     * @example
+     * // Count the number of RecipeLabels
+     * const count = await prisma.recipeLabel.count({
+     *   where: {
+     *     // ... the filter for the RecipeLabels we want to count
+     *   }
+     * })
+    **/
+    count<T extends RecipeLabelCountArgs>(
+      args?: Subset<T, RecipeLabelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RecipeLabelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RecipeLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecipeLabelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RecipeLabelAggregateArgs>(args: Subset<T, RecipeLabelAggregateArgs>): Prisma.PrismaPromise<GetRecipeLabelAggregateType<T>>
+
+    /**
+     * Group by RecipeLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecipeLabelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RecipeLabelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RecipeLabelGroupByArgs['orderBy'] }
+        : { orderBy?: RecipeLabelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RecipeLabelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRecipeLabelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RecipeLabel model
+   */
+  readonly fields: RecipeLabelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RecipeLabel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RecipeLabelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    recipe<T extends RecipeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RecipeDefaultArgs<ExtArgs>>): Prisma__RecipeClient<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    label<T extends LabelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LabelDefaultArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RecipeLabel model
+   */
+  interface RecipeLabelFieldRefs {
+    readonly id: FieldRef<"RecipeLabel", 'String'>
+    readonly recipeId: FieldRef<"RecipeLabel", 'String'>
+    readonly labelId: FieldRef<"RecipeLabel", 'String'>
+    readonly createdAt: FieldRef<"RecipeLabel", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RecipeLabel findUnique
+   */
+  export type RecipeLabelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which RecipeLabel to fetch.
+     */
+    where: RecipeLabelWhereUniqueInput
+  }
+
+  /**
+   * RecipeLabel findUniqueOrThrow
+   */
+  export type RecipeLabelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which RecipeLabel to fetch.
+     */
+    where: RecipeLabelWhereUniqueInput
+  }
+
+  /**
+   * RecipeLabel findFirst
+   */
+  export type RecipeLabelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which RecipeLabel to fetch.
+     */
+    where?: RecipeLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecipeLabels to fetch.
+     */
+    orderBy?: RecipeLabelOrderByWithRelationInput | RecipeLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RecipeLabels.
+     */
+    cursor?: RecipeLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecipeLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecipeLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RecipeLabels.
+     */
+    distinct?: RecipeLabelScalarFieldEnum | RecipeLabelScalarFieldEnum[]
+  }
+
+  /**
+   * RecipeLabel findFirstOrThrow
+   */
+  export type RecipeLabelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which RecipeLabel to fetch.
+     */
+    where?: RecipeLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecipeLabels to fetch.
+     */
+    orderBy?: RecipeLabelOrderByWithRelationInput | RecipeLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RecipeLabels.
+     */
+    cursor?: RecipeLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecipeLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecipeLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RecipeLabels.
+     */
+    distinct?: RecipeLabelScalarFieldEnum | RecipeLabelScalarFieldEnum[]
+  }
+
+  /**
+   * RecipeLabel findMany
+   */
+  export type RecipeLabelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which RecipeLabels to fetch.
+     */
+    where?: RecipeLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecipeLabels to fetch.
+     */
+    orderBy?: RecipeLabelOrderByWithRelationInput | RecipeLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RecipeLabels.
+     */
+    cursor?: RecipeLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecipeLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecipeLabels.
+     */
+    skip?: number
+    distinct?: RecipeLabelScalarFieldEnum | RecipeLabelScalarFieldEnum[]
+  }
+
+  /**
+   * RecipeLabel create
+   */
+  export type RecipeLabelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RecipeLabel.
+     */
+    data: XOR<RecipeLabelCreateInput, RecipeLabelUncheckedCreateInput>
+  }
+
+  /**
+   * RecipeLabel createMany
+   */
+  export type RecipeLabelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RecipeLabels.
+     */
+    data: RecipeLabelCreateManyInput | RecipeLabelCreateManyInput[]
+  }
+
+  /**
+   * RecipeLabel createManyAndReturn
+   */
+  export type RecipeLabelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * The data used to create many RecipeLabels.
+     */
+    data: RecipeLabelCreateManyInput | RecipeLabelCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RecipeLabel update
+   */
+  export type RecipeLabelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RecipeLabel.
+     */
+    data: XOR<RecipeLabelUpdateInput, RecipeLabelUncheckedUpdateInput>
+    /**
+     * Choose, which RecipeLabel to update.
+     */
+    where: RecipeLabelWhereUniqueInput
+  }
+
+  /**
+   * RecipeLabel updateMany
+   */
+  export type RecipeLabelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RecipeLabels.
+     */
+    data: XOR<RecipeLabelUpdateManyMutationInput, RecipeLabelUncheckedUpdateManyInput>
+    /**
+     * Filter which RecipeLabels to update
+     */
+    where?: RecipeLabelWhereInput
+    /**
+     * Limit how many RecipeLabels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RecipeLabel updateManyAndReturn
+   */
+  export type RecipeLabelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * The data used to update RecipeLabels.
+     */
+    data: XOR<RecipeLabelUpdateManyMutationInput, RecipeLabelUncheckedUpdateManyInput>
+    /**
+     * Filter which RecipeLabels to update
+     */
+    where?: RecipeLabelWhereInput
+    /**
+     * Limit how many RecipeLabels to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RecipeLabel upsert
+   */
+  export type RecipeLabelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RecipeLabel to update in case it exists.
+     */
+    where: RecipeLabelWhereUniqueInput
+    /**
+     * In case the RecipeLabel found by the `where` argument doesn't exist, create a new RecipeLabel with this data.
+     */
+    create: XOR<RecipeLabelCreateInput, RecipeLabelUncheckedCreateInput>
+    /**
+     * In case the RecipeLabel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RecipeLabelUpdateInput, RecipeLabelUncheckedUpdateInput>
+  }
+
+  /**
+   * RecipeLabel delete
+   */
+  export type RecipeLabelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+    /**
+     * Filter which RecipeLabel to delete.
+     */
+    where: RecipeLabelWhereUniqueInput
+  }
+
+  /**
+   * RecipeLabel deleteMany
+   */
+  export type RecipeLabelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RecipeLabels to delete
+     */
+    where?: RecipeLabelWhereInput
+    /**
+     * Limit how many RecipeLabels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RecipeLabel without action
+   */
+  export type RecipeLabelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeLabel
+     */
+    select?: RecipeLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeLabel
+     */
+    omit?: RecipeLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeLabelInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8119,6 +10488,27 @@ export namespace Prisma {
   };
 
   export type IngredientScalarFieldEnum = (typeof IngredientScalarFieldEnum)[keyof typeof IngredientScalarFieldEnum]
+
+
+  export const LabelScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    color: 'color',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type LabelScalarFieldEnum = (typeof LabelScalarFieldEnum)[keyof typeof LabelScalarFieldEnum]
+
+
+  export const RecipeLabelScalarFieldEnum: {
+    id: 'id',
+    recipeId: 'recipeId',
+    labelId: 'labelId',
+    createdAt: 'createdAt'
+  };
+
+  export type RecipeLabelScalarFieldEnum = (typeof RecipeLabelScalarFieldEnum)[keyof typeof RecipeLabelScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8449,6 +10839,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Recipe"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ingredients?: IngredientListRelationFilter
+    labels?: RecipeLabelListRelationFilter
   }
 
   export type RecipeOrderByWithRelationInput = {
@@ -8462,6 +10853,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     ingredients?: IngredientOrderByRelationAggregateInput
+    labels?: RecipeLabelOrderByRelationAggregateInput
   }
 
   export type RecipeWhereUniqueInput = Prisma.AtLeast<{
@@ -8478,6 +10870,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Recipe"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ingredients?: IngredientListRelationFilter
+    labels?: RecipeLabelListRelationFilter
   }, "id">
 
   export type RecipeOrderByWithAggregationInput = {
@@ -8575,6 +10968,115 @@ export namespace Prisma {
     recipeId?: StringWithAggregatesFilter<"Ingredient"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Ingredient"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Ingredient"> | Date | string
+  }
+
+  export type LabelWhereInput = {
+    AND?: LabelWhereInput | LabelWhereInput[]
+    OR?: LabelWhereInput[]
+    NOT?: LabelWhereInput | LabelWhereInput[]
+    id?: StringFilter<"Label"> | string
+    name?: StringFilter<"Label"> | string
+    color?: StringFilter<"Label"> | string
+    createdAt?: DateTimeFilter<"Label"> | Date | string
+    updatedAt?: DateTimeFilter<"Label"> | Date | string
+    recipes?: RecipeLabelListRelationFilter
+  }
+
+  export type LabelOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    recipes?: RecipeLabelOrderByRelationAggregateInput
+  }
+
+  export type LabelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: LabelWhereInput | LabelWhereInput[]
+    OR?: LabelWhereInput[]
+    NOT?: LabelWhereInput | LabelWhereInput[]
+    color?: StringFilter<"Label"> | string
+    createdAt?: DateTimeFilter<"Label"> | Date | string
+    updatedAt?: DateTimeFilter<"Label"> | Date | string
+    recipes?: RecipeLabelListRelationFilter
+  }, "id" | "name">
+
+  export type LabelOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: LabelCountOrderByAggregateInput
+    _max?: LabelMaxOrderByAggregateInput
+    _min?: LabelMinOrderByAggregateInput
+  }
+
+  export type LabelScalarWhereWithAggregatesInput = {
+    AND?: LabelScalarWhereWithAggregatesInput | LabelScalarWhereWithAggregatesInput[]
+    OR?: LabelScalarWhereWithAggregatesInput[]
+    NOT?: LabelScalarWhereWithAggregatesInput | LabelScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Label"> | string
+    name?: StringWithAggregatesFilter<"Label"> | string
+    color?: StringWithAggregatesFilter<"Label"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Label"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Label"> | Date | string
+  }
+
+  export type RecipeLabelWhereInput = {
+    AND?: RecipeLabelWhereInput | RecipeLabelWhereInput[]
+    OR?: RecipeLabelWhereInput[]
+    NOT?: RecipeLabelWhereInput | RecipeLabelWhereInput[]
+    id?: StringFilter<"RecipeLabel"> | string
+    recipeId?: StringFilter<"RecipeLabel"> | string
+    labelId?: StringFilter<"RecipeLabel"> | string
+    createdAt?: DateTimeFilter<"RecipeLabel"> | Date | string
+    recipe?: XOR<RecipeScalarRelationFilter, RecipeWhereInput>
+    label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
+  }
+
+  export type RecipeLabelOrderByWithRelationInput = {
+    id?: SortOrder
+    recipeId?: SortOrder
+    labelId?: SortOrder
+    createdAt?: SortOrder
+    recipe?: RecipeOrderByWithRelationInput
+    label?: LabelOrderByWithRelationInput
+  }
+
+  export type RecipeLabelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    recipeId_labelId?: RecipeLabelRecipeIdLabelIdCompoundUniqueInput
+    AND?: RecipeLabelWhereInput | RecipeLabelWhereInput[]
+    OR?: RecipeLabelWhereInput[]
+    NOT?: RecipeLabelWhereInput | RecipeLabelWhereInput[]
+    recipeId?: StringFilter<"RecipeLabel"> | string
+    labelId?: StringFilter<"RecipeLabel"> | string
+    createdAt?: DateTimeFilter<"RecipeLabel"> | Date | string
+    recipe?: XOR<RecipeScalarRelationFilter, RecipeWhereInput>
+    label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
+  }, "id" | "recipeId_labelId">
+
+  export type RecipeLabelOrderByWithAggregationInput = {
+    id?: SortOrder
+    recipeId?: SortOrder
+    labelId?: SortOrder
+    createdAt?: SortOrder
+    _count?: RecipeLabelCountOrderByAggregateInput
+    _max?: RecipeLabelMaxOrderByAggregateInput
+    _min?: RecipeLabelMinOrderByAggregateInput
+  }
+
+  export type RecipeLabelScalarWhereWithAggregatesInput = {
+    AND?: RecipeLabelScalarWhereWithAggregatesInput | RecipeLabelScalarWhereWithAggregatesInput[]
+    OR?: RecipeLabelScalarWhereWithAggregatesInput[]
+    NOT?: RecipeLabelScalarWhereWithAggregatesInput | RecipeLabelScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RecipeLabel"> | string
+    recipeId?: StringWithAggregatesFilter<"RecipeLabel"> | string
+    labelId?: StringWithAggregatesFilter<"RecipeLabel"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"RecipeLabel"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -8870,6 +11372,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutRecipesInput
     ingredients?: IngredientCreateNestedManyWithoutRecipeInput
+    labels?: RecipeLabelCreateNestedManyWithoutRecipeInput
   }
 
   export type RecipeUncheckedCreateInput = {
@@ -8882,6 +11385,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: IngredientUncheckedCreateNestedManyWithoutRecipeInput
+    labels?: RecipeLabelUncheckedCreateNestedManyWithoutRecipeInput
   }
 
   export type RecipeUpdateInput = {
@@ -8894,6 +11398,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutRecipesNestedInput
     ingredients?: IngredientUpdateManyWithoutRecipeNestedInput
+    labels?: RecipeLabelUpdateManyWithoutRecipeNestedInput
   }
 
   export type RecipeUncheckedUpdateInput = {
@@ -8906,6 +11411,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUncheckedUpdateManyWithoutRecipeNestedInput
+    labels?: RecipeLabelUncheckedUpdateManyWithoutRecipeNestedInput
   }
 
   export type RecipeCreateManyInput = {
@@ -9007,6 +11513,113 @@ export namespace Prisma {
     recipeId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LabelCreateInput = {
+    id?: string
+    name: string
+    color?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    recipes?: RecipeLabelCreateNestedManyWithoutLabelInput
+  }
+
+  export type LabelUncheckedCreateInput = {
+    id?: string
+    name: string
+    color?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    recipes?: RecipeLabelUncheckedCreateNestedManyWithoutLabelInput
+  }
+
+  export type LabelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recipes?: RecipeLabelUpdateManyWithoutLabelNestedInput
+  }
+
+  export type LabelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recipes?: RecipeLabelUncheckedUpdateManyWithoutLabelNestedInput
+  }
+
+  export type LabelCreateManyInput = {
+    id?: string
+    name: string
+    color?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LabelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LabelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecipeLabelCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    recipe: RecipeCreateNestedOneWithoutLabelsInput
+    label: LabelCreateNestedOneWithoutRecipesInput
+  }
+
+  export type RecipeLabelUncheckedCreateInput = {
+    id?: string
+    recipeId: string
+    labelId: string
+    createdAt?: Date | string
+  }
+
+  export type RecipeLabelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recipe?: RecipeUpdateOneRequiredWithoutLabelsNestedInput
+    label?: LabelUpdateOneRequiredWithoutRecipesNestedInput
+  }
+
+  export type RecipeLabelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recipeId?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecipeLabelCreateManyInput = {
+    id?: string
+    recipeId: string
+    labelId: string
+    createdAt?: Date | string
+  }
+
+  export type RecipeLabelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecipeLabelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recipeId?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -9340,7 +11953,17 @@ export namespace Prisma {
     none?: IngredientWhereInput
   }
 
+  export type RecipeLabelListRelationFilter = {
+    every?: RecipeLabelWhereInput
+    some?: RecipeLabelWhereInput
+    none?: RecipeLabelWhereInput
+  }
+
   export type IngredientOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RecipeLabelOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9469,6 +12092,61 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type LabelCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LabelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LabelMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LabelScalarRelationFilter = {
+    is?: LabelWhereInput
+    isNot?: LabelWhereInput
+  }
+
+  export type RecipeLabelRecipeIdLabelIdCompoundUniqueInput = {
+    recipeId: string
+    labelId: string
+  }
+
+  export type RecipeLabelCountOrderByAggregateInput = {
+    id?: SortOrder
+    recipeId?: SortOrder
+    labelId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RecipeLabelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    recipeId?: SortOrder
+    labelId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RecipeLabelMinOrderByAggregateInput = {
+    id?: SortOrder
+    recipeId?: SortOrder
+    labelId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -9662,11 +12340,25 @@ export namespace Prisma {
     connect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
   }
 
+  export type RecipeLabelCreateNestedManyWithoutRecipeInput = {
+    create?: XOR<RecipeLabelCreateWithoutRecipeInput, RecipeLabelUncheckedCreateWithoutRecipeInput> | RecipeLabelCreateWithoutRecipeInput[] | RecipeLabelUncheckedCreateWithoutRecipeInput[]
+    connectOrCreate?: RecipeLabelCreateOrConnectWithoutRecipeInput | RecipeLabelCreateOrConnectWithoutRecipeInput[]
+    createMany?: RecipeLabelCreateManyRecipeInputEnvelope
+    connect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+  }
+
   export type IngredientUncheckedCreateNestedManyWithoutRecipeInput = {
     create?: XOR<IngredientCreateWithoutRecipeInput, IngredientUncheckedCreateWithoutRecipeInput> | IngredientCreateWithoutRecipeInput[] | IngredientUncheckedCreateWithoutRecipeInput[]
     connectOrCreate?: IngredientCreateOrConnectWithoutRecipeInput | IngredientCreateOrConnectWithoutRecipeInput[]
     createMany?: IngredientCreateManyRecipeInputEnvelope
     connect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
+  }
+
+  export type RecipeLabelUncheckedCreateNestedManyWithoutRecipeInput = {
+    create?: XOR<RecipeLabelCreateWithoutRecipeInput, RecipeLabelUncheckedCreateWithoutRecipeInput> | RecipeLabelCreateWithoutRecipeInput[] | RecipeLabelUncheckedCreateWithoutRecipeInput[]
+    connectOrCreate?: RecipeLabelCreateOrConnectWithoutRecipeInput | RecipeLabelCreateOrConnectWithoutRecipeInput[]
+    createMany?: RecipeLabelCreateManyRecipeInputEnvelope
+    connect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -9699,6 +12391,20 @@ export namespace Prisma {
     deleteMany?: IngredientScalarWhereInput | IngredientScalarWhereInput[]
   }
 
+  export type RecipeLabelUpdateManyWithoutRecipeNestedInput = {
+    create?: XOR<RecipeLabelCreateWithoutRecipeInput, RecipeLabelUncheckedCreateWithoutRecipeInput> | RecipeLabelCreateWithoutRecipeInput[] | RecipeLabelUncheckedCreateWithoutRecipeInput[]
+    connectOrCreate?: RecipeLabelCreateOrConnectWithoutRecipeInput | RecipeLabelCreateOrConnectWithoutRecipeInput[]
+    upsert?: RecipeLabelUpsertWithWhereUniqueWithoutRecipeInput | RecipeLabelUpsertWithWhereUniqueWithoutRecipeInput[]
+    createMany?: RecipeLabelCreateManyRecipeInputEnvelope
+    set?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    disconnect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    delete?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    connect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    update?: RecipeLabelUpdateWithWhereUniqueWithoutRecipeInput | RecipeLabelUpdateWithWhereUniqueWithoutRecipeInput[]
+    updateMany?: RecipeLabelUpdateManyWithWhereWithoutRecipeInput | RecipeLabelUpdateManyWithWhereWithoutRecipeInput[]
+    deleteMany?: RecipeLabelScalarWhereInput | RecipeLabelScalarWhereInput[]
+  }
+
   export type IngredientUncheckedUpdateManyWithoutRecipeNestedInput = {
     create?: XOR<IngredientCreateWithoutRecipeInput, IngredientUncheckedCreateWithoutRecipeInput> | IngredientCreateWithoutRecipeInput[] | IngredientUncheckedCreateWithoutRecipeInput[]
     connectOrCreate?: IngredientCreateOrConnectWithoutRecipeInput | IngredientCreateOrConnectWithoutRecipeInput[]
@@ -9711,6 +12417,20 @@ export namespace Prisma {
     update?: IngredientUpdateWithWhereUniqueWithoutRecipeInput | IngredientUpdateWithWhereUniqueWithoutRecipeInput[]
     updateMany?: IngredientUpdateManyWithWhereWithoutRecipeInput | IngredientUpdateManyWithWhereWithoutRecipeInput[]
     deleteMany?: IngredientScalarWhereInput | IngredientScalarWhereInput[]
+  }
+
+  export type RecipeLabelUncheckedUpdateManyWithoutRecipeNestedInput = {
+    create?: XOR<RecipeLabelCreateWithoutRecipeInput, RecipeLabelUncheckedCreateWithoutRecipeInput> | RecipeLabelCreateWithoutRecipeInput[] | RecipeLabelUncheckedCreateWithoutRecipeInput[]
+    connectOrCreate?: RecipeLabelCreateOrConnectWithoutRecipeInput | RecipeLabelCreateOrConnectWithoutRecipeInput[]
+    upsert?: RecipeLabelUpsertWithWhereUniqueWithoutRecipeInput | RecipeLabelUpsertWithWhereUniqueWithoutRecipeInput[]
+    createMany?: RecipeLabelCreateManyRecipeInputEnvelope
+    set?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    disconnect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    delete?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    connect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    update?: RecipeLabelUpdateWithWhereUniqueWithoutRecipeInput | RecipeLabelUpdateWithWhereUniqueWithoutRecipeInput[]
+    updateMany?: RecipeLabelUpdateManyWithWhereWithoutRecipeInput | RecipeLabelUpdateManyWithWhereWithoutRecipeInput[]
+    deleteMany?: RecipeLabelScalarWhereInput | RecipeLabelScalarWhereInput[]
   }
 
   export type RecipeCreateNestedOneWithoutIngredientsInput = {
@@ -9733,6 +12453,76 @@ export namespace Prisma {
     upsert?: RecipeUpsertWithoutIngredientsInput
     connect?: RecipeWhereUniqueInput
     update?: XOR<XOR<RecipeUpdateToOneWithWhereWithoutIngredientsInput, RecipeUpdateWithoutIngredientsInput>, RecipeUncheckedUpdateWithoutIngredientsInput>
+  }
+
+  export type RecipeLabelCreateNestedManyWithoutLabelInput = {
+    create?: XOR<RecipeLabelCreateWithoutLabelInput, RecipeLabelUncheckedCreateWithoutLabelInput> | RecipeLabelCreateWithoutLabelInput[] | RecipeLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: RecipeLabelCreateOrConnectWithoutLabelInput | RecipeLabelCreateOrConnectWithoutLabelInput[]
+    createMany?: RecipeLabelCreateManyLabelInputEnvelope
+    connect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+  }
+
+  export type RecipeLabelUncheckedCreateNestedManyWithoutLabelInput = {
+    create?: XOR<RecipeLabelCreateWithoutLabelInput, RecipeLabelUncheckedCreateWithoutLabelInput> | RecipeLabelCreateWithoutLabelInput[] | RecipeLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: RecipeLabelCreateOrConnectWithoutLabelInput | RecipeLabelCreateOrConnectWithoutLabelInput[]
+    createMany?: RecipeLabelCreateManyLabelInputEnvelope
+    connect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+  }
+
+  export type RecipeLabelUpdateManyWithoutLabelNestedInput = {
+    create?: XOR<RecipeLabelCreateWithoutLabelInput, RecipeLabelUncheckedCreateWithoutLabelInput> | RecipeLabelCreateWithoutLabelInput[] | RecipeLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: RecipeLabelCreateOrConnectWithoutLabelInput | RecipeLabelCreateOrConnectWithoutLabelInput[]
+    upsert?: RecipeLabelUpsertWithWhereUniqueWithoutLabelInput | RecipeLabelUpsertWithWhereUniqueWithoutLabelInput[]
+    createMany?: RecipeLabelCreateManyLabelInputEnvelope
+    set?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    disconnect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    delete?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    connect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    update?: RecipeLabelUpdateWithWhereUniqueWithoutLabelInput | RecipeLabelUpdateWithWhereUniqueWithoutLabelInput[]
+    updateMany?: RecipeLabelUpdateManyWithWhereWithoutLabelInput | RecipeLabelUpdateManyWithWhereWithoutLabelInput[]
+    deleteMany?: RecipeLabelScalarWhereInput | RecipeLabelScalarWhereInput[]
+  }
+
+  export type RecipeLabelUncheckedUpdateManyWithoutLabelNestedInput = {
+    create?: XOR<RecipeLabelCreateWithoutLabelInput, RecipeLabelUncheckedCreateWithoutLabelInput> | RecipeLabelCreateWithoutLabelInput[] | RecipeLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: RecipeLabelCreateOrConnectWithoutLabelInput | RecipeLabelCreateOrConnectWithoutLabelInput[]
+    upsert?: RecipeLabelUpsertWithWhereUniqueWithoutLabelInput | RecipeLabelUpsertWithWhereUniqueWithoutLabelInput[]
+    createMany?: RecipeLabelCreateManyLabelInputEnvelope
+    set?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    disconnect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    delete?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    connect?: RecipeLabelWhereUniqueInput | RecipeLabelWhereUniqueInput[]
+    update?: RecipeLabelUpdateWithWhereUniqueWithoutLabelInput | RecipeLabelUpdateWithWhereUniqueWithoutLabelInput[]
+    updateMany?: RecipeLabelUpdateManyWithWhereWithoutLabelInput | RecipeLabelUpdateManyWithWhereWithoutLabelInput[]
+    deleteMany?: RecipeLabelScalarWhereInput | RecipeLabelScalarWhereInput[]
+  }
+
+  export type RecipeCreateNestedOneWithoutLabelsInput = {
+    create?: XOR<RecipeCreateWithoutLabelsInput, RecipeUncheckedCreateWithoutLabelsInput>
+    connectOrCreate?: RecipeCreateOrConnectWithoutLabelsInput
+    connect?: RecipeWhereUniqueInput
+  }
+
+  export type LabelCreateNestedOneWithoutRecipesInput = {
+    create?: XOR<LabelCreateWithoutRecipesInput, LabelUncheckedCreateWithoutRecipesInput>
+    connectOrCreate?: LabelCreateOrConnectWithoutRecipesInput
+    connect?: LabelWhereUniqueInput
+  }
+
+  export type RecipeUpdateOneRequiredWithoutLabelsNestedInput = {
+    create?: XOR<RecipeCreateWithoutLabelsInput, RecipeUncheckedCreateWithoutLabelsInput>
+    connectOrCreate?: RecipeCreateOrConnectWithoutLabelsInput
+    upsert?: RecipeUpsertWithoutLabelsInput
+    connect?: RecipeWhereUniqueInput
+    update?: XOR<XOR<RecipeUpdateToOneWithWhereWithoutLabelsInput, RecipeUpdateWithoutLabelsInput>, RecipeUncheckedUpdateWithoutLabelsInput>
+  }
+
+  export type LabelUpdateOneRequiredWithoutRecipesNestedInput = {
+    create?: XOR<LabelCreateWithoutRecipesInput, LabelUncheckedCreateWithoutRecipesInput>
+    connectOrCreate?: LabelCreateOrConnectWithoutRecipesInput
+    upsert?: LabelUpsertWithoutRecipesInput
+    connect?: LabelWhereUniqueInput
+    update?: XOR<XOR<LabelUpdateToOneWithWhereWithoutRecipesInput, LabelUpdateWithoutRecipesInput>, LabelUncheckedUpdateWithoutRecipesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -10006,6 +12796,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: IngredientCreateNestedManyWithoutRecipeInput
+    labels?: RecipeLabelCreateNestedManyWithoutRecipeInput
   }
 
   export type RecipeUncheckedCreateWithoutUserInput = {
@@ -10017,6 +12808,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: IngredientUncheckedCreateNestedManyWithoutRecipeInput
+    labels?: RecipeLabelUncheckedCreateNestedManyWithoutRecipeInput
   }
 
   export type RecipeCreateOrConnectWithoutUserInput = {
@@ -10312,6 +13104,27 @@ export namespace Prisma {
     data: IngredientCreateManyRecipeInput | IngredientCreateManyRecipeInput[]
   }
 
+  export type RecipeLabelCreateWithoutRecipeInput = {
+    id?: string
+    createdAt?: Date | string
+    label: LabelCreateNestedOneWithoutRecipesInput
+  }
+
+  export type RecipeLabelUncheckedCreateWithoutRecipeInput = {
+    id?: string
+    labelId: string
+    createdAt?: Date | string
+  }
+
+  export type RecipeLabelCreateOrConnectWithoutRecipeInput = {
+    where: RecipeLabelWhereUniqueInput
+    create: XOR<RecipeLabelCreateWithoutRecipeInput, RecipeLabelUncheckedCreateWithoutRecipeInput>
+  }
+
+  export type RecipeLabelCreateManyRecipeInputEnvelope = {
+    data: RecipeLabelCreateManyRecipeInput | RecipeLabelCreateManyRecipeInput[]
+  }
+
   export type UserUpsertWithoutRecipesInput = {
     update: XOR<UserUpdateWithoutRecipesInput, UserUncheckedUpdateWithoutRecipesInput>
     create: XOR<UserCreateWithoutRecipesInput, UserUncheckedCreateWithoutRecipesInput>
@@ -10378,6 +13191,32 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Ingredient"> | Date | string
   }
 
+  export type RecipeLabelUpsertWithWhereUniqueWithoutRecipeInput = {
+    where: RecipeLabelWhereUniqueInput
+    update: XOR<RecipeLabelUpdateWithoutRecipeInput, RecipeLabelUncheckedUpdateWithoutRecipeInput>
+    create: XOR<RecipeLabelCreateWithoutRecipeInput, RecipeLabelUncheckedCreateWithoutRecipeInput>
+  }
+
+  export type RecipeLabelUpdateWithWhereUniqueWithoutRecipeInput = {
+    where: RecipeLabelWhereUniqueInput
+    data: XOR<RecipeLabelUpdateWithoutRecipeInput, RecipeLabelUncheckedUpdateWithoutRecipeInput>
+  }
+
+  export type RecipeLabelUpdateManyWithWhereWithoutRecipeInput = {
+    where: RecipeLabelScalarWhereInput
+    data: XOR<RecipeLabelUpdateManyMutationInput, RecipeLabelUncheckedUpdateManyWithoutRecipeInput>
+  }
+
+  export type RecipeLabelScalarWhereInput = {
+    AND?: RecipeLabelScalarWhereInput | RecipeLabelScalarWhereInput[]
+    OR?: RecipeLabelScalarWhereInput[]
+    NOT?: RecipeLabelScalarWhereInput | RecipeLabelScalarWhereInput[]
+    id?: StringFilter<"RecipeLabel"> | string
+    recipeId?: StringFilter<"RecipeLabel"> | string
+    labelId?: StringFilter<"RecipeLabel"> | string
+    createdAt?: DateTimeFilter<"RecipeLabel"> | Date | string
+  }
+
   export type RecipeCreateWithoutIngredientsInput = {
     id?: string
     title: string
@@ -10387,6 +13226,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutRecipesInput
+    labels?: RecipeLabelCreateNestedManyWithoutRecipeInput
   }
 
   export type RecipeUncheckedCreateWithoutIngredientsInput = {
@@ -10398,6 +13238,7 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    labels?: RecipeLabelUncheckedCreateNestedManyWithoutRecipeInput
   }
 
   export type RecipeCreateOrConnectWithoutIngredientsInput = {
@@ -10425,6 +13266,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutRecipesNestedInput
+    labels?: RecipeLabelUpdateManyWithoutRecipeNestedInput
   }
 
   export type RecipeUncheckedUpdateWithoutIngredientsInput = {
@@ -10434,6 +13276,156 @@ export namespace Prisma {
     instructions?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    labels?: RecipeLabelUncheckedUpdateManyWithoutRecipeNestedInput
+  }
+
+  export type RecipeLabelCreateWithoutLabelInput = {
+    id?: string
+    createdAt?: Date | string
+    recipe: RecipeCreateNestedOneWithoutLabelsInput
+  }
+
+  export type RecipeLabelUncheckedCreateWithoutLabelInput = {
+    id?: string
+    recipeId: string
+    createdAt?: Date | string
+  }
+
+  export type RecipeLabelCreateOrConnectWithoutLabelInput = {
+    where: RecipeLabelWhereUniqueInput
+    create: XOR<RecipeLabelCreateWithoutLabelInput, RecipeLabelUncheckedCreateWithoutLabelInput>
+  }
+
+  export type RecipeLabelCreateManyLabelInputEnvelope = {
+    data: RecipeLabelCreateManyLabelInput | RecipeLabelCreateManyLabelInput[]
+  }
+
+  export type RecipeLabelUpsertWithWhereUniqueWithoutLabelInput = {
+    where: RecipeLabelWhereUniqueInput
+    update: XOR<RecipeLabelUpdateWithoutLabelInput, RecipeLabelUncheckedUpdateWithoutLabelInput>
+    create: XOR<RecipeLabelCreateWithoutLabelInput, RecipeLabelUncheckedCreateWithoutLabelInput>
+  }
+
+  export type RecipeLabelUpdateWithWhereUniqueWithoutLabelInput = {
+    where: RecipeLabelWhereUniqueInput
+    data: XOR<RecipeLabelUpdateWithoutLabelInput, RecipeLabelUncheckedUpdateWithoutLabelInput>
+  }
+
+  export type RecipeLabelUpdateManyWithWhereWithoutLabelInput = {
+    where: RecipeLabelScalarWhereInput
+    data: XOR<RecipeLabelUpdateManyMutationInput, RecipeLabelUncheckedUpdateManyWithoutLabelInput>
+  }
+
+  export type RecipeCreateWithoutLabelsInput = {
+    id?: string
+    title: string
+    author: string
+    instructions: string
+    rating: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutRecipesInput
+    ingredients?: IngredientCreateNestedManyWithoutRecipeInput
+  }
+
+  export type RecipeUncheckedCreateWithoutLabelsInput = {
+    id?: string
+    title: string
+    author: string
+    instructions: string
+    rating: number
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ingredients?: IngredientUncheckedCreateNestedManyWithoutRecipeInput
+  }
+
+  export type RecipeCreateOrConnectWithoutLabelsInput = {
+    where: RecipeWhereUniqueInput
+    create: XOR<RecipeCreateWithoutLabelsInput, RecipeUncheckedCreateWithoutLabelsInput>
+  }
+
+  export type LabelCreateWithoutRecipesInput = {
+    id?: string
+    name: string
+    color?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LabelUncheckedCreateWithoutRecipesInput = {
+    id?: string
+    name: string
+    color?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LabelCreateOrConnectWithoutRecipesInput = {
+    where: LabelWhereUniqueInput
+    create: XOR<LabelCreateWithoutRecipesInput, LabelUncheckedCreateWithoutRecipesInput>
+  }
+
+  export type RecipeUpsertWithoutLabelsInput = {
+    update: XOR<RecipeUpdateWithoutLabelsInput, RecipeUncheckedUpdateWithoutLabelsInput>
+    create: XOR<RecipeCreateWithoutLabelsInput, RecipeUncheckedCreateWithoutLabelsInput>
+    where?: RecipeWhereInput
+  }
+
+  export type RecipeUpdateToOneWithWhereWithoutLabelsInput = {
+    where?: RecipeWhereInput
+    data: XOR<RecipeUpdateWithoutLabelsInput, RecipeUncheckedUpdateWithoutLabelsInput>
+  }
+
+  export type RecipeUpdateWithoutLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    author?: StringFieldUpdateOperationsInput | string
+    instructions?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRecipesNestedInput
+    ingredients?: IngredientUpdateManyWithoutRecipeNestedInput
+  }
+
+  export type RecipeUncheckedUpdateWithoutLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    author?: StringFieldUpdateOperationsInput | string
+    instructions?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ingredients?: IngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  }
+
+  export type LabelUpsertWithoutRecipesInput = {
+    update: XOR<LabelUpdateWithoutRecipesInput, LabelUncheckedUpdateWithoutRecipesInput>
+    create: XOR<LabelCreateWithoutRecipesInput, LabelUncheckedCreateWithoutRecipesInput>
+    where?: LabelWhereInput
+  }
+
+  export type LabelUpdateToOneWithWhereWithoutRecipesInput = {
+    where?: LabelWhereInput
+    data: XOR<LabelUpdateWithoutRecipesInput, LabelUncheckedUpdateWithoutRecipesInput>
+  }
+
+  export type LabelUpdateWithoutRecipesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LabelUncheckedUpdateWithoutRecipesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10537,6 +13529,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUpdateManyWithoutRecipeNestedInput
+    labels?: RecipeLabelUpdateManyWithoutRecipeNestedInput
   }
 
   export type RecipeUncheckedUpdateWithoutUserInput = {
@@ -10548,6 +13541,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUncheckedUpdateManyWithoutRecipeNestedInput
+    labels?: RecipeLabelUncheckedUpdateManyWithoutRecipeNestedInput
   }
 
   export type RecipeUncheckedUpdateManyWithoutUserInput = {
@@ -10567,6 +13561,12 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type RecipeLabelCreateManyRecipeInput = {
+    id?: string
+    labelId: string
+    createdAt?: Date | string
   }
 
   export type IngredientUpdateWithoutRecipeInput = {
@@ -10594,6 +13594,48 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecipeLabelUpdateWithoutRecipeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: LabelUpdateOneRequiredWithoutRecipesNestedInput
+  }
+
+  export type RecipeLabelUncheckedUpdateWithoutRecipeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecipeLabelUncheckedUpdateManyWithoutRecipeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecipeLabelCreateManyLabelInput = {
+    id?: string
+    recipeId: string
+    createdAt?: Date | string
+  }
+
+  export type RecipeLabelUpdateWithoutLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recipe?: RecipeUpdateOneRequiredWithoutLabelsNestedInput
+  }
+
+  export type RecipeLabelUncheckedUpdateWithoutLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recipeId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecipeLabelUncheckedUpdateManyWithoutLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recipeId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

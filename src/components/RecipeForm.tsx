@@ -1,7 +1,8 @@
 'use client';
 
-import { Recipe, Ingredient } from '@/types/recipe';
-import { useState } from 'react';
+import { Recipe, Ingredient, Label } from '@/types/recipe';
+import { useState, useEffect } from 'react';
+import { getAllLabels } from '@/app/actions';
 
 interface RecipeFormProps {
   initialData?: Partial<Recipe>;
@@ -69,6 +70,22 @@ export default function RecipeForm({ initialData, onSubmit, submitLabel }: Recip
       name: i.name
     })) || []
   );
+  const [availableLabels, setAvailableLabels] = useState<Label[]>([]);
+  const [selectedLabelIds, setSelectedLabelIds] = useState<string[]>(
+    initialData?.labels?.map(l => l.labelId) || []
+  );
+
+  useEffect(() => {
+    const loadLabels = async () => {
+      try {
+        const labels = await getAllLabels();
+        setAvailableLabels(labels);
+      } catch (error) {
+        console.error('Failed to load labels:', error);
+      }
+    };
+    loadLabels();
+  }, []);
 
   const addIngredient = () => {
     setIngredients([...ingredients, { quantity: '', unit: '', name: '' }]);
@@ -87,6 +104,14 @@ export default function RecipeForm({ initialData, onSubmit, submitLabel }: Recip
     setIngredients(newIngredients);
   };
 
+  const handleLabelToggle = (labelId: string) => {
+    setSelectedLabelIds(prev => 
+      prev.includes(labelId) 
+        ? prev.filter(id => id !== labelId)
+        : [...prev, labelId]
+    );
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData: FormRecipe = {
@@ -102,6 +127,13 @@ export default function RecipeForm({ initialData, onSubmit, submitLabel }: Recip
         createdAt: new Date(),
         updatedAt: new Date()
       })) as Ingredient[],
+      labels: selectedLabelIds.map(labelId => ({
+        id: '',
+        recipeId: '',
+        labelId,
+        label: availableLabels.find(l => l.id === labelId)!,
+        createdAt: new Date()
+      })),
       rating: parseInt(rating),
     };
     await onSubmit(formData);
@@ -145,6 +177,28 @@ export default function RecipeForm({ initialData, onSubmit, submitLabel }: Recip
           required
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-900"
         />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-900 mb-2">Labels</label>
+        <div className="grid grid-cols-2 gap-3">
+          {availableLabels.map((label) => (
+            <label key={label.id} className="flex items-center space-x-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={selectedLabelIds.includes(label.id)}
+                onChange={() => handleLabelToggle(label.id)}
+                className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <span 
+                className="text-sm px-2 py-1 rounded-full text-white"
+                style={{ backgroundColor: label.color }}
+              >
+                {label.name}
+              </span>
+            </label>
+          ))}
+        </div>
       </div>
 
       <div>

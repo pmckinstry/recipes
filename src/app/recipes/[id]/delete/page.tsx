@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect, use } from 'react';
 import { getRecipe, deleteRecipe } from '@/app/actions';
 import MainContent from '@/components/MainContent';
+import { useSession } from 'next-auth/react';
 
 interface DeleteRecipePageProps {
   params: Promise<{
@@ -20,6 +21,7 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
   const [error, setError] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const { id } = use(params);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     async function loadRecipe() {
@@ -53,7 +55,7 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
     }
   };
 
-  if (loading) {
+  if (loading || status === 'loading') {
     return (
       <MainContent>
         <div className="text-center">
@@ -68,6 +70,27 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
       <MainContent>
         <div className="text-center text-red-600">
           {error || 'Recipe not found'}
+        </div>
+      </MainContent>
+    );
+  }
+
+  // Check if user is authenticated and owns the recipe
+  if (!session) {
+    return (
+      <MainContent>
+        <div className="text-center text-red-600">
+          You must be logged in to delete recipes.
+        </div>
+      </MainContent>
+    );
+  }
+
+  if (!recipe.user || recipe.user.id !== session.user?.id) {
+    return (
+      <MainContent>
+        <div className="text-center text-red-600">
+          You can only delete your own recipes.
         </div>
       </MainContent>
     );
