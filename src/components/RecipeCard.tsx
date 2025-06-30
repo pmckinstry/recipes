@@ -30,6 +30,22 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
         </div>
       </div>
       
+      {recipe.labels && recipe.labels.length > 0 && (
+        <div className="mb-4">
+          <div className="flex flex-wrap gap-2">
+            {recipe.labels.map((recipeLabel) => (
+              <span
+                key={recipeLabel.id}
+                className="text-xs px-2 py-1 rounded-full text-white font-medium"
+                style={{ backgroundColor: recipeLabel.label.color }}
+              >
+                {recipeLabel.label.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      
       <div className="mb-4">
         <h3 className="text-lg font-semibold mb-2">Ingredients:</h3>
         <ul className="list-disc list-inside">

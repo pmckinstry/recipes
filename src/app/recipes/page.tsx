@@ -5,6 +5,7 @@ import { Recipe } from '@/types/recipe';
 import { getRecipes } from '@/app/actions';
 import { useEffect, useState } from 'react';
 import MainContent from '@/components/MainContent';
+import { useSession } from 'next-auth/react';
 
 const StarRating = ({ rating }: { rating: number }) => {
   const stars = [];
@@ -22,6 +23,7 @@ export default function RecipesPage() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     async function loadRecipes() {
@@ -39,7 +41,7 @@ export default function RecipesPage() {
     loadRecipes();
   }, []);
 
-  if (loading) {
+  if (loading || status === 'loading') {
     return (
       <MainContent>
         <div className="text-center">
@@ -63,12 +65,14 @@ export default function RecipesPage() {
     <MainContent>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold text-gray-900">Recipes</h1>
-        <Link
-          href="/recipes/new"
-          className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
-        >
-          Add New Recipe
-        </Link>
+        {session && (
+          <Link
+            href="/recipes/new"
+            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+          >
+            Add New Recipe
+          </Link>
+        )}
       </div>
       <div className="grid gap-6">
         {recipes.map((recipe) => (
@@ -81,22 +85,37 @@ export default function RecipesPage() {
                   <StarRating rating={recipe.rating} />
                   <span className="ml-2 text-sm text-gray-600">({recipe.rating}/5)</span>
                 </div>
+                {recipe.labels && recipe.labels.length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {recipe.labels.map((recipeLabel) => (
+                      <span
+                        key={recipeLabel.id}
+                        className="text-xs px-2 py-1 rounded-full text-white font-medium"
+                        style={{ backgroundColor: recipeLabel.label.color }}
+                      >
+                        {recipeLabel.label.name}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </Link>
-            <div className="absolute top-4 right-4 space-x-2">
-              <Link
-                href={`/recipes/${recipe.id}/edit`}
-                className="text-indigo-600 hover:text-indigo-800"
-              >
-                Edit
-              </Link>
-              <Link
-                href={`/recipes/${recipe.id}/delete`}
-                className="text-red-600 hover:text-red-800"
-              >
-                Delete
-              </Link>
-            </div>
+            {session && recipe.user && recipe.user.id === session.user?.id && (
+              <div className="absolute top-4 right-4 space-x-2">
+                <Link
+                  href={`/recipes/${recipe.id}/edit`}
+                  className="text-indigo-600 hover:text-indigo-800"
+                >
+                  Edit
+                </Link>
+                <Link
+                  href={`/recipes/${recipe.id}/delete`}
+                  className="text-red-600 hover:text-red-800"
+                >
+                  Delete
+                </Link>
+              </div>
+            )}
           </div>
         ))}
       </div>
