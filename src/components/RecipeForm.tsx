@@ -134,12 +134,12 @@ export default function RecipeForm({ initialData, onSubmit, submitLabel }: Recip
       </div>
 
       <div>
-        <label htmlFor="rating" className="block text-sm font-medium text-gray-900">Rating (1-10)</label>
+        <label htmlFor="rating" className="block text-sm font-medium text-gray-900">Rating (1-5)</label>
         <input
           type="number"
           id="rating"
           min="1"
-          max="10"
+          max="5"
           value={rating}
           onChange={(e) => setRating(e.target.value)}
           required

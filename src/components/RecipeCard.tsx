@@ -6,20 +6,37 @@ interface RecipeCardProps {
   recipe: Recipe;
 }
 
+const StarRating = ({ rating }: { rating: number }) => {
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+    stars.push(
+      <span key={i} className={i <= rating ? 'text-yellow-500' : 'text-gray-300'}>
+        ★
+      </span>
+    );
+  }
+  return <span className="text-lg">{stars}</span>;
+};
+
 export default function RecipeCard({ recipe }: RecipeCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-2xl font-bold mb-2">{recipe.title}</h2>
       <div className="flex items-center mb-4">
         <span className="text-gray-600">By {recipe.author}</span>
-        <span className="ml-4 text-yellow-500">★ {recipe.rating}/10</span>
+        <div className="ml-4 flex items-center">
+          <StarRating rating={recipe.rating} />
+          <span className="ml-2 text-sm text-gray-600">({recipe.rating}/5)</span>
+        </div>
       </div>
       
       <div className="mb-4">
         <h3 className="text-lg font-semibold mb-2">Ingredients:</h3>
         <ul className="list-disc list-inside">
           {recipe.ingredients.map((ingredient, index) => (
-            <li key={index} className="text-gray-700">{ingredient}</li>
+            <li key={index} className="text-gray-700">
+              {ingredient.quantity} {ingredient.unit} {ingredient.name}
+            </li>
           ))}
         </ul>
       </div>

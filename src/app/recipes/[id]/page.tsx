@@ -155,7 +155,7 @@ export default function RecipePage({ params }: RecipePageProps) {
                   </svg>
                 ))}
               </div>
-              <span className="ml-2 text-gray-600">{recipe.rating}/10</span>
+              <span className="ml-2 text-gray-600">{recipe.rating}/5</span>
             </div>
           </div>
         </div>

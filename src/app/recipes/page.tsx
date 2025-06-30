@@ -6,6 +6,18 @@ import { getRecipes } from '@/app/actions';
 import { useEffect, useState } from 'react';
 import MainContent from '@/components/MainContent';
 
+const StarRating = ({ rating }: { rating: number }) => {
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+    stars.push(
+      <span key={i} className={i <= rating ? 'text-yellow-500' : 'text-gray-300'}>
+        ★
+      </span>
+    );
+  }
+  return <span className="text-lg">{stars}</span>;
+};
+
 export default function RecipesPage() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
@@ -66,8 +78,8 @@ export default function RecipesPage() {
                 <h2 className="text-xl font-bold mb-2 text-gray-900">{recipe.title}</h2>
                 <p className="text-gray-600">By {recipe.author}</p>
                 <div className="flex items-center mt-2">
-                  <span className="text-yellow-500">★</span>
-                  <span className="ml-1 text-gray-600">{recipe.rating}/10</span>
+                  <StarRating rating={recipe.rating} />
+                  <span className="ml-2 text-sm text-gray-600">({recipe.rating}/5)</span>
                 </div>
               </div>
             </Link>

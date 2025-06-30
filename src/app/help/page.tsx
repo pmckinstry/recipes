@@ -51,7 +51,7 @@ export default function HelpPage() {
               <div>
                 <h3 className="text-lg font-medium mb-2">How do I rate a recipe?</h3>
                 <p className="text-gray-600">
-                  When adding or editing a recipe, you can set a rating from 1 to 10. 
+                  When adding or editing a recipe, you can set a rating from 1 to 5. 
                   This helps you keep track of your favorite recipes.
                 </p>
               </div>
