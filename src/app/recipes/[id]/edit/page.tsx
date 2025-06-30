@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect, use } from 'react';
 import { getRecipe, updateRecipe } from '@/app/actions';
 import MainContent from '@/components/MainContent';
+import { useSession } from 'next-auth/react';
 
 interface EditRecipePageProps {
   params: Promise<{
@@ -20,6 +21,7 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { id } = use(params);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     async function loadRecipe() {
@@ -41,7 +43,7 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
     loadRecipe();
   }, [id]);
 
-  const handleSubmit = async (updatedRecipe: Omit<Recipe, 'id'>) => {
+  const handleSubmit = async (updatedRecipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
       await updateRecipe(id, updatedRecipe);
       router.push(`/recipes/${id}`);
@@ -51,7 +53,7 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
     }
   };
 
-  if (loading) {
+  if (loading || status === 'loading') {
     return (
       <MainContent>
         <div className="text-center">
@@ -66,6 +68,27 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
       <MainContent>
         <div className="text-center text-red-600">
           {error || 'Recipe not found'}
+        </div>
+      </MainContent>
+    );
+  }
+
+  // Check if user is authenticated and owns the recipe
+  if (!session) {
+    return (
+      <MainContent>
+        <div className="text-center text-red-600">
+          You must be logged in to edit recipes.
+        </div>
+      </MainContent>
+    );
+  }
+
+  if (!recipe.user || recipe.user.id !== session.user?.id) {
+    return (
+      <MainContent>
+        <div className="text-center text-red-600">
+          You can only edit your own recipes.
         </div>
       </MainContent>
     );
