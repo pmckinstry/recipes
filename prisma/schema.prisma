@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -18,11 +15,11 @@ model User {
   password      String?
   emailVerified DateTime?
   image         String?
-  accounts      Account[]
-  sessions      Session[]
-  recipes       Recipe[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  recipes       Recipe[]
+  sessions      Session[]
 }
 
 model Account {
@@ -60,46 +57,46 @@ model VerificationToken {
 }
 
 model Recipe {
-  id          String      @id @default(uuid())
-  title       String
-  author      String
+  id           String        @id @default(uuid())
+  title        String
+  author       String
   instructions String
-  rating      Int
-  userId      String
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  ingredients Ingredient[]
-  labels      RecipeLabel[]
+  rating       Int
+  userId       String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  ingredients  Ingredient[]
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  labels       RecipeLabel[]
 }
 
 model Ingredient {
-  id          String   @id @default(uuid())
-  quantity    Float
-  unit        String
-  name        String
-  recipeId    String
-  recipe      Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(uuid())
+  quantity  Float
+  unit      String
+  name      String
+  recipeId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 }
 
 model Label {
   id        String        @id @default(uuid())
   name      String        @unique
   color     String        @default("#3B82F6")
-  recipes   RecipeLabel[]
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
+  recipes   RecipeLabel[]
 }
 
 model RecipeLabel {
-  id       String @id @default(uuid())
-  recipeId String
-  labelId  String
-  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  label    Label  @relation(fields: [labelId], references: [id], onDelete: Cascade)
+  id        String   @id @default(uuid())
+  recipeId  String
+  labelId   String
   createdAt DateTime @default(now())
+  label     Label    @relation(fields: [labelId], references: [id], onDelete: Cascade)
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 
   @@unique([recipeId, labelId])
 }

@@ -2,24 +2,17 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 
 export default function TopNav() {
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isActive = (path: string) => {
-    // Only show active state after component is mounted (client-side)
-    if (!mounted) {
-      return 'text-gray-600 hover:text-indigo-600';
-    }
-    return pathname === path ? 'text-indigo-600' : 'text-gray-600 hover:text-indigo-600';
+  const getLinkClasses = (path: string) => {
+    const baseClasses = 'inline-flex items-center px-1 pt-1 text-sm font-medium';
+    const isActive = pathname === path;
+    const stateClasses = isActive ? 'text-indigo-600' : 'text-gray-600 hover:text-indigo-600';
+    return `${baseClasses} ${stateClasses}`;
   };
 
   const handleSignOut = async () => {
@@ -33,19 +26,25 @@ export default function TopNav() {
           <div className="flex space-x-8">
             <Link
               href="/"
-              className={`inline-flex items-center px-1 pt-1 text-sm font-medium ${isActive('/')}`}
+              className={getLinkClasses('/')}
             >
               Home
             </Link>
             <Link
               href="/recipes"
-              className={`inline-flex items-center px-1 pt-1 text-sm font-medium ${isActive('/recipes')}`}
+              className={getLinkClasses('/recipes')}
             >
               Recipes
             </Link>
             <Link
+              href="/labels"
+              className={getLinkClasses('/labels')}
+            >
+              Labels
+            </Link>
+            <Link
               href="/help"
-              className={`inline-flex items-center px-1 pt-1 text-sm font-medium ${isActive('/help')}`}
+              className={getLinkClasses('/help')}
             >
               Help
             </Link>
@@ -64,16 +63,13 @@ export default function TopNav() {
                       className="w-8 h-8 rounded-full"
                     />
                   )}
-                  <span className="text-sm text-gray-700">
+                  <Link
+                    href="/profile"
+                    className={`text-sm font-medium ${pathname === '/profile' ? 'text-indigo-600' : 'text-gray-600 hover:text-indigo-600'}`}
+                  >
                     {session.user?.name || session.user?.email}
-                  </span>
+                  </Link>
                 </div>
-                <Link
-                  href="/profile"
-                  className={`text-sm ${isActive('/profile')}`}
-                >
-                  Profile
-                </Link>
                 <button
                   onClick={handleSignOut}
                   className="text-sm text-gray-600 hover:text-indigo-600"
