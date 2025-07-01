@@ -32,7 +32,11 @@ npm install
 ```
 
 3. Set up environment variables:
-Create a `.env.local` file in the root directory with:
+Copy the example file and adjust the values:
+```bash
+cp .env.example .env.local
+```
+`.env.example` contains all required environment variables:
 ```env
 # Database
 DATABASE_URL="file:./dev.db"
@@ -51,8 +55,13 @@ GOOGLE_CLIENT_SECRET="your-google-client-secret"
 npx prisma migrate dev
 npx prisma db seed
 ```
+These commands will generate a local SQLite database at `prisma/dev.db`, which is not tracked in version control.
 
-5. Run the development server:
+5. Generate the Prisma client:
+```bash
+npx prisma generate
+```
+6. Run the development server:
 ```bash
 npm run dev
 ```

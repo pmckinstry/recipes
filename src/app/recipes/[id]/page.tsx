@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect, use } from 'react';
 import { getRecipe } from '@/app/actions';
 import MainContent from '@/components/MainContent';
+import { useSession } from 'next-auth/react';
 
 // Common fractions and their decimal values
 const COMMON_FRACTIONS: { [key: number]: string } = {
@@ -43,6 +44,7 @@ export default function RecipePage({ params }: RecipePageProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { id } = use(params);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     async function loadRecipe() {
@@ -64,7 +66,7 @@ export default function RecipePage({ params }: RecipePageProps) {
     loadRecipe();
   }, [id]);
 
-  if (loading) {
+  if (loading || status === 'loading') {
     return (
       <MainContent>
         <div className="text-center">
@@ -84,6 +86,8 @@ export default function RecipePage({ params }: RecipePageProps) {
     );
   }
 
+  const isOwner = session && recipe.user && recipe.user.id === session.user?.id;
+
   return (
     <MainContent>
       <div className="max-w-4xl mx-auto">
@@ -96,18 +100,22 @@ export default function RecipePage({ params }: RecipePageProps) {
             >
               ← Back to Recipes
             </Link>
-            <Link
-              href={`/recipes/${id}/edit`}
-              className="text-indigo-600 hover:text-indigo-800"
-            >
-              Edit
-            </Link>
-            <Link
-              href={`/recipes/${id}/delete`}
-              className="text-red-600 hover:text-red-800"
-            >
-              Delete
-            </Link>
+            {isOwner && (
+              <>
+                <Link
+                  href={`/recipes/${id}/edit`}
+                  className="text-indigo-600 hover:text-indigo-800"
+                >
+                  Edit
+                </Link>
+                <Link
+                  href={`/recipes/${id}/delete`}
+                  className="text-red-600 hover:text-red-800"
+                >
+                  Delete
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
