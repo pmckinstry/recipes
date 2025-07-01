@@ -43,7 +43,9 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
     loadRecipe();
   }, [id]);
 
-  const handleSubmit = async (updatedRecipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const handleSubmit = async (
+    updatedRecipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>
+  ) => {
     try {
       await updateRecipe(id, updatedRecipe);
       router.push(`/recipes/${id}`);
@@ -56,9 +58,7 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
   if (loading || status === 'loading') {
     return (
       <MainContent>
-        <div className="text-center">
-          Loading...
-        </div>
+        <div className='text-center'>Loading...</div>
       </MainContent>
     );
   }
@@ -66,7 +66,7 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
   if (error || !recipe) {
     return (
       <MainContent>
-        <div className="text-center text-red-600">
+        <div className='text-center text-red-600'>
           {error || 'Recipe not found'}
         </div>
       </MainContent>
@@ -77,7 +77,7 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
   if (!session) {
     return (
       <MainContent>
-        <div className="text-center text-red-600">
+        <div className='text-center text-red-600'>
           You must be logged in to edit recipes.
         </div>
       </MainContent>
@@ -87,7 +87,7 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
   if (!recipe.user || recipe.user.id !== session.user?.id) {
     return (
       <MainContent>
-        <div className="text-center text-red-600">
+        <div className='text-center text-red-600'>
           You can only edit your own recipes.
         </div>
       </MainContent>
@@ -96,11 +96,11 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
 
   return (
     <MainContent>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-900">Edit Recipe</h1>
+      <div className='flex justify-between items-center mb-8'>
+        <h1 className='text-4xl font-bold text-gray-900'>Edit Recipe</h1>
         <Link
           href={`/recipes/${id}`}
-          className="text-indigo-600 hover:text-indigo-800"
+          className='text-indigo-600 hover:text-indigo-800'
         >
           ← Back to Recipe
         </Link>
@@ -108,8 +108,8 @@ export default function EditRecipePage({ params }: EditRecipePageProps) {
       <RecipeForm
         initialData={recipe}
         onSubmit={handleSubmit}
-        submitLabel="Update Recipe"
+        submitLabel='Update Recipe'
       />
     </MainContent>
   );
-} 
+}

@@ -58,9 +58,7 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
   if (loading || status === 'loading') {
     return (
       <MainContent>
-        <div className="text-center">
-          Loading...
-        </div>
+        <div className='text-center'>Loading...</div>
       </MainContent>
     );
   }
@@ -68,7 +66,7 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
   if (error || !recipe) {
     return (
       <MainContent>
-        <div className="text-center text-red-600">
+        <div className='text-center text-red-600'>
           {error || 'Recipe not found'}
         </div>
       </MainContent>
@@ -79,7 +77,7 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
   if (!session) {
     return (
       <MainContent>
-        <div className="text-center text-red-600">
+        <div className='text-center text-red-600'>
           You must be logged in to delete recipes.
         </div>
       </MainContent>
@@ -89,7 +87,7 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
   if (!recipe.user || recipe.user.id !== session.user?.id) {
     return (
       <MainContent>
-        <div className="text-center text-red-600">
+        <div className='text-center text-red-600'>
           You can only delete your own recipes.
         </div>
       </MainContent>
@@ -98,27 +96,30 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
 
   return (
     <MainContent>
-      <div className="max-w-2xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">Delete Recipe</h1>
+      <div className='max-w-2xl mx-auto'>
+        <div className='flex justify-between items-center mb-8'>
+          <h1 className='text-4xl font-bold text-gray-900'>Delete Recipe</h1>
           <Link
             href={`/recipes/${id}`}
-            className="text-indigo-600 hover:text-indigo-800"
+            className='text-indigo-600 hover:text-indigo-800'
           >
             ← Back to Recipe
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-gray-900">{recipe.title}</h2>
-          <p className="text-gray-600 mb-4">By {recipe.author}</p>
-          <p className="text-red-600 mb-6">
-            Are you sure you want to delete this recipe? This action cannot be undone.
+        <div className='bg-white rounded-lg shadow-md p-6 mb-8'>
+          <h2 className='text-2xl font-bold mb-4 text-gray-900'>
+            {recipe.title}
+          </h2>
+          <p className='text-gray-600 mb-4'>By {recipe.author}</p>
+          <p className='text-red-600 mb-6'>
+            Are you sure you want to delete this recipe? This action cannot be
+            undone.
           </p>
-          <div className="flex justify-end space-x-4">
+          <div className='flex justify-end space-x-4'>
             <Link
               href={`/recipes/${id}`}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+              className='px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50'
             >
               Cancel
             </Link>
@@ -136,4 +137,4 @@ export default function DeleteRecipePage({ params }: DeleteRecipePageProps) {
       </div>
     </MainContent>
   );
-} 
+}

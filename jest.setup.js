@@ -1,22 +1,22 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 
 // Extend expect matchers
 expect.extend({
   toBeInTheDocument(received) {
-    const pass = received !== null && received !== undefined
+    const pass = received !== null && received !== undefined;
     if (pass) {
       return {
         message: () => `expected ${received} not to be in the document`,
         pass: true,
-      }
+      };
     } else {
       return {
         message: () => `expected ${received} to be in the document`,
         pass: false,
-      }
+      };
     }
   },
-})
+});
 
 // Mock Next.js router
 jest.mock('next/navigation', () => ({
@@ -30,16 +30,16 @@ jest.mock('next/navigation', () => ({
   }),
   useSearchParams: () => new URLSearchParams(),
   usePathname: () => '/',
-}))
+}));
 
 // Mock Next.js Image component
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props) => {
+  default: props => {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img {...props} />
+    return <img {...props} />;
   },
-}))
+}));
 
 // Mock Prisma
 jest.mock('@/lib/db', () => ({
@@ -71,7 +71,7 @@ jest.mock('@/lib/db', () => ({
       findUnique: jest.fn(),
     },
   },
-}))
+}));
 
 // Mock server actions
 jest.mock('@/app/actions', () => ({
@@ -86,24 +86,22 @@ jest.mock('@/app/actions', () => ({
   updateLabel: jest.fn(),
   deleteLabel: jest.fn(),
   getRecipesByLabel: jest.fn(),
-}))
-
-
+}));
 
 // Suppress console errors in tests
-const originalError = console.error
+const originalError = console.error;
 beforeAll(() => {
   console.error = (...args) => {
     if (
       typeof args[0] === 'string' &&
       args[0].includes('Warning: ReactDOM.render is no longer supported')
     ) {
-      return
+      return;
     }
-    originalError.call(console, ...args)
-  }
-})
+    originalError.call(console, ...args);
+  };
+});
 
 afterAll(() => {
-  console.error = originalError
-}) 
+  console.error = originalError;
+});

@@ -12,7 +12,9 @@ export default function NewRecipePage() {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  const handleSubmit = async (recipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const handleSubmit = async (
+    recipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>
+  ) => {
     try {
       await createRecipe(recipe);
       router.push('/recipes');
@@ -25,9 +27,7 @@ export default function NewRecipePage() {
   if (status === 'loading') {
     return (
       <MainContent>
-        <div className="text-center">
-          Loading...
-        </div>
+        <div className='text-center'>Loading...</div>
       </MainContent>
     );
   }
@@ -35,7 +35,7 @@ export default function NewRecipePage() {
   if (!session) {
     return (
       <MainContent>
-        <div className="text-center text-red-600">
+        <div className='text-center text-red-600'>
           You must be logged in to create recipes.
         </div>
       </MainContent>
@@ -44,20 +44,17 @@ export default function NewRecipePage() {
 
   return (
     <MainContent>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-900">Add New Recipe</h1>
-        <Link
-          href="/recipes"
-          className="text-indigo-600 hover:text-indigo-800"
-        >
+      <div className='flex justify-between items-center mb-8'>
+        <h1 className='text-4xl font-bold text-gray-900'>Add New Recipe</h1>
+        <Link href='/recipes' className='text-indigo-600 hover:text-indigo-800'>
           ← Back to Recipes
         </Link>
       </div>
       <RecipeForm
         onSubmit={handleSubmit}
-        submitLabel="Create Recipe"
+        submitLabel='Create Recipe'
         initialData={{ author: session.user?.name || '' }}
       />
     </MainContent>
   );
-} 
+}
