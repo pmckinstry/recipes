@@ -17,29 +17,33 @@ A Next.js recipe management application with authentication, built with TypeScri
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm, yarn, pnpm, or bun
 
 ### Installation
 
 1. **Clone the repository:**
+
 ```bash
 git clone <your-repo-url>
 cd recipes
 ```
 
 2. **Install dependencies:**
+
 ```bash
 npm install
 ```
 
 3. **Set up environment variables:**
-Create a `.env.local` file in the root directory:
+   Create a `.env.local` file in the root directory:
+
 ```bash
 cp .env.example .env.local
 ```
 
 Required environment variables:
+
 ```env
 # Database
 DATABASE_URL="file:./dev.db"
@@ -54,11 +58,13 @@ GOOGLE_CLIENT_SECRET="your-google-client-secret"
 ```
 
 **Note:** Generate a secure `NEXTAUTH_SECRET` using:
+
 ```bash
 openssl rand -base64 32
 ```
 
 4. **Set up the database:**
+
 ```bash
 # Run database migrations to create tables
 npx prisma migrate dev
@@ -71,11 +77,13 @@ npx prisma generate
 ```
 
 **What these commands do:**
+
 - `npx prisma migrate dev` - Creates the database schema and applies all migrations
 - `npx prisma db seed` - Populates the database with sample recipes, ingredients, and labels
 - `npx prisma generate` - Generates the Prisma client for TypeScript support
 
 5. **Run the development server:**
+
 ```bash
 npm run dev
 ```
@@ -98,6 +106,7 @@ The application uses SQLite with Prisma ORM. The database file is created at `pr
 ### Sample Data
 
 The seed script creates:
+
 - 2 sample recipes with ingredients
 - 8 predefined labels (Dessert, Quick, Healthy, etc.)
 - Sample user data for testing
@@ -121,15 +130,161 @@ The app also supports email/password authentication. Users can sign up and sign 
 
 ### Running Tests
 
+The project includes a comprehensive test suite using Jest and React Testing Library.
+
+#### Test Commands
+
 ```bash
-# Run all tests
+# Run all tests once
 npm test
 
-# Run tests in watch mode
+# Run tests in watch mode (reruns on file changes)
 npm run test:watch
 
-# Run tests with coverage
+# Run tests with coverage report
 npm run test:coverage
+
+# Run specific test file
+npm test -- src/__tests__/components/RecipeCard.test.tsx
+
+# Run tests matching a pattern
+npm test -- --testNamePattern="RecipeCard"
+
+# Run tests in verbose mode
+npm test -- --verbose
+```
+
+#### Test Structure
+
+The test suite is organized as follows:
+
+```
+src/__tests__/
+├── actions/           # Server action tests
+│   ├── recipe-actions.test.ts
+│   └── label-actions.test.ts
+└── components/        # Component tests
+    ├── RecipeCard.test.tsx
+    ├── RecipeForm.test.tsx
+    └── MainContent.test.tsx
+```
+
+#### What's Tested
+
+**Component Tests:**
+- **RecipeCard** - Recipe display component rendering and interactions
+- **RecipeForm** - Form validation, submission, and user interactions
+- **MainContent** - Main page layout and recipe listing
+
+**Server Action Tests:**
+- **Recipe Actions** - CRUD operations for recipes (create, read, update, delete)
+- **Label Actions** - CRUD operations for labels (create, read, update, delete)
+
+#### Test Coverage
+
+The test suite covers:
+- ✅ **Component rendering** - All components render correctly
+- ✅ **User interactions** - Form submissions, button clicks, navigation
+- ✅ **Server actions** - Database operations and authentication checks
+- ✅ **Error handling** - Invalid inputs, authentication failures
+- ✅ **Edge cases** - Empty states, loading states, validation errors
+
+#### Writing Tests
+
+**Component Test Example:**
+```typescript
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import RecipeCard from '@/components/RecipeCard';
+
+describe('RecipeCard', () => {
+  it('displays recipe information correctly', () => {
+    const recipe = {
+      id: '1',
+      title: 'Test Recipe',
+      author: 'Test Author',
+      rating: 5,
+      // ... other properties
+    };
+
+    render(<RecipeCard recipe={recipe} />);
+    
+    expect(screen.getByText('Test Recipe')).toBeInTheDocument();
+    expect(screen.getByText('Test Author')).toBeInTheDocument();
+  });
+});
+```
+
+**Server Action Test Example:**
+```typescript
+import { createRecipe } from '@/app/actions';
+
+// Mock the entire actions module
+jest.mock('@/app/actions', () => ({
+  createRecipe: jest.fn(),
+}));
+
+describe('Recipe Actions', () => {
+  it('creates a recipe successfully', async () => {
+    const mockCreateRecipe = createRecipe as jest.MockedFunction<typeof createRecipe>;
+    const recipeData = { title: 'New Recipe', author: 'Author' };
+    
+    mockCreateRecipe.mockResolvedValue({ id: '1', ...recipeData });
+    
+    const result = await createRecipe(recipeData);
+    expect(result.title).toBe('New Recipe');
+  });
+});
+```
+
+#### Test Configuration
+
+The project uses:
+- **Jest** - Test runner and assertion library
+- **React Testing Library** - Component testing utilities
+- **@testing-library/jest-dom** - Custom Jest matchers
+- **@testing-library/user-event** - User interaction simulation
+
+#### Debugging Tests
+
+```bash
+# Run tests with detailed output
+npm test -- --verbose
+
+# Run a single test file with debugging
+npm test -- src/__tests__/components/RecipeCard.test.tsx --verbose
+
+# Run tests and watch for changes
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+```
+
+#### Continuous Integration
+
+Tests are automatically run in CI/CD pipelines:
+- All tests must pass before merging
+- Coverage reports are generated
+- Test results are reported in pull requests
+
+### Code Quality
+
+```bash
+# Format code with Prettier
+npm run format
+
+# Check code formatting
+npm run format:check
+
+# Run ESLint
+npm run lint
+
+# Fix ESLint issues automatically
+npm run lint:fix
+
+# Run TypeScript type checking
+npm run type-check
 ```
 
 ### Database Management
@@ -146,16 +301,6 @@ npx prisma migrate dev --name migration_name
 
 # Deploy migrations to production
 npx prisma migrate deploy
-```
-
-### Type Checking
-
-```bash
-# Run TypeScript compiler
-npm run type-check
-
-# Run ESLint
-npm run lint
 ```
 
 ## Project Structure
@@ -188,6 +333,7 @@ src/
 - **SQLite** - Database
 - **Jest** - Testing framework
 - **React Testing Library** - Component testing utilities
+- **Prettier** - Code formatting
 
 ## Troubleshooting
 
@@ -211,6 +357,11 @@ src/
    - Ensure all dependencies are installed: `npm install`
    - Check that Jest configuration is correct
    - Verify that test environment variables are set
+
+5. **Formatting issues:**
+   - Run `npm run format` to format all files
+   - Check `npm run format:check` to see what needs formatting
+   - Ensure your editor is configured to use Prettier
 
 ### Reset Everything
 
@@ -242,6 +393,7 @@ To learn more about the technologies used:
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Jest Documentation](https://jestjs.io/docs/getting-started)
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Prettier Documentation](https://prettier.io/docs/en/)
 
 ## Deploy on Vercel
 

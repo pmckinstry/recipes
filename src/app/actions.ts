@@ -10,16 +10,16 @@ export async function getRecipes() {
       ingredients: true,
       labels: {
         include: {
-          label: true
-        }
+          label: true,
+        },
       },
       user: {
         select: {
           id: true,
           name: true,
-          email: true
-        }
-      }
+          email: true,
+        },
+      },
     },
     orderBy: {
       createdAt: 'desc',
@@ -36,17 +36,17 @@ export async function getRecipe(id: string) {
       ingredients: true,
       labels: {
         include: {
-          label: true
-        }
+          label: true,
+        },
       },
       user: {
         select: {
           id: true,
           name: true,
-          email: true
-        }
-      }
-    }
+          email: true,
+        },
+      },
+    },
   });
 
   return recipe;
@@ -55,16 +55,18 @@ export async function getRecipe(id: string) {
 export async function getAllLabels() {
   const labels = await prisma.label.findMany({
     orderBy: {
-      name: 'asc'
-    }
+      name: 'asc',
+    },
   });
 
   return labels;
 }
 
-export async function createRecipe(recipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>) {
+export async function createRecipe(
+  recipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>
+) {
   const session = await auth();
-  
+
   if (!session?.user?.id) {
     throw new Error('You must be logged in to create a recipe');
   }
@@ -80,38 +82,42 @@ export async function createRecipe(recipe: Omit<Recipe, 'id' | 'createdAt' | 'up
         create: recipe.ingredients.map(ingredient => ({
           quantity: ingredient.quantity,
           unit: ingredient.unit,
-          name: ingredient.name
-        }))
+          name: ingredient.name,
+        })),
       },
       labels: {
-        create: recipe.labels?.map(recipeLabel => ({
-          labelId: recipeLabel.labelId
-        })) || []
-      }
+        create:
+          recipe.labels?.map(recipeLabel => ({
+            labelId: recipeLabel.labelId,
+          })) || [],
+      },
     },
     include: {
       ingredients: true,
       labels: {
         include: {
-          label: true
-        }
+          label: true,
+        },
       },
       user: {
         select: {
           id: true,
           name: true,
-          email: true
-        }
-      }
-    }
+          email: true,
+        },
+      },
+    },
   });
 
   return newRecipe;
 }
 
-export async function updateRecipe(id: string, recipe: Partial<Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>>) {
+export async function updateRecipe(
+  id: string,
+  recipe: Partial<Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>>
+) {
   const session = await auth();
-  
+
   if (!session?.user?.id) {
     throw new Error('You must be logged in to update a recipe');
   }
@@ -119,7 +125,7 @@ export async function updateRecipe(id: string, recipe: Partial<Omit<Recipe, 'id'
   // Check if the recipe belongs to the current user
   const existingRecipe = await prisma.recipe.findUnique({
     where: { id },
-    select: { userId: true }
+    select: { userId: true },
   });
 
   if (!existingRecipe) {
@@ -132,11 +138,11 @@ export async function updateRecipe(id: string, recipe: Partial<Omit<Recipe, 'id'
 
   // First, delete all existing ingredients and labels
   await prisma.ingredient.deleteMany({
-    where: { recipeId: id }
+    where: { recipeId: id },
   });
 
   await prisma.recipeLabel.deleteMany({
-    where: { recipeId: id }
+    where: { recipeId: id },
   });
 
   // Then update the recipe and create new ingredients and labels
@@ -148,33 +154,35 @@ export async function updateRecipe(id: string, recipe: Partial<Omit<Recipe, 'id'
       instructions: recipe.instructions,
       rating: recipe.rating,
       ingredients: {
-        create: recipe.ingredients?.map(ingredient => ({
-          quantity: ingredient.quantity,
-          unit: ingredient.unit,
-          name: ingredient.name
-        })) || []
+        create:
+          recipe.ingredients?.map(ingredient => ({
+            quantity: ingredient.quantity,
+            unit: ingredient.unit,
+            name: ingredient.name,
+          })) || [],
       },
       labels: {
-        create: recipe.labels?.map(recipeLabel => ({
-          labelId: recipeLabel.labelId
-        })) || []
-      }
+        create:
+          recipe.labels?.map(recipeLabel => ({
+            labelId: recipeLabel.labelId,
+          })) || [],
+      },
     },
     include: {
       ingredients: true,
       labels: {
         include: {
-          label: true
-        }
+          label: true,
+        },
       },
       user: {
         select: {
           id: true,
           name: true,
-          email: true
-        }
-      }
-    }
+          email: true,
+        },
+      },
+    },
   });
 
   return updatedRecipe;
@@ -182,7 +190,7 @@ export async function updateRecipe(id: string, recipe: Partial<Omit<Recipe, 'id'
 
 export async function deleteRecipe(id: string) {
   const session = await auth();
-  
+
   if (!session?.user?.id) {
     throw new Error('You must be logged in to delete a recipe');
   }
@@ -190,7 +198,7 @@ export async function deleteRecipe(id: string) {
   // Check if the recipe belongs to the current user
   const existingRecipe = await prisma.recipe.findUnique({
     where: { id },
-    select: { userId: true }
+    select: { userId: true },
   });
 
   if (!existingRecipe) {
@@ -203,13 +211,15 @@ export async function deleteRecipe(id: string) {
 
   // The cascade delete will handle removing the ingredients
   await prisma.recipe.delete({
-    where: { id }
+    where: { id },
   });
 }
 
-export async function createLabel(label: Omit<Label, 'id' | 'createdAt' | 'updatedAt'>) {
+export async function createLabel(
+  label: Omit<Label, 'id' | 'createdAt' | 'updatedAt'>
+) {
   const session = await auth();
-  
+
   if (!session?.user?.id) {
     throw new Error('You must be logged in to create labels');
   }
@@ -218,15 +228,18 @@ export async function createLabel(label: Omit<Label, 'id' | 'createdAt' | 'updat
     data: {
       name: label.name,
       color: label.color,
-    }
+    },
   });
 
   return newLabel;
 }
 
-export async function updateLabel(id: string, label: Partial<Omit<Label, 'id' | 'createdAt' | 'updatedAt'>>) {
+export async function updateLabel(
+  id: string,
+  label: Partial<Omit<Label, 'id' | 'createdAt' | 'updatedAt'>>
+) {
   const session = await auth();
-  
+
   if (!session?.user?.id) {
     throw new Error('You must be logged in to update labels');
   }
@@ -236,7 +249,7 @@ export async function updateLabel(id: string, label: Partial<Omit<Label, 'id' | 
     data: {
       name: label.name,
       color: label.color,
-    }
+    },
   });
 
   return updatedLabel;
@@ -244,14 +257,14 @@ export async function updateLabel(id: string, label: Partial<Omit<Label, 'id' | 
 
 export async function deleteLabel(id: string) {
   const session = await auth();
-  
+
   if (!session?.user?.id) {
     throw new Error('You must be logged in to delete labels');
   }
 
   // Check if the label is being used by any recipes
   const recipeLabels = await prisma.recipeLabel.findMany({
-    where: { labelId: id }
+    where: { labelId: id },
   });
 
   if (recipeLabels.length > 0) {
@@ -259,13 +272,13 @@ export async function deleteLabel(id: string) {
   }
 
   await prisma.label.delete({
-    where: { id }
+    where: { id },
   });
 }
 
 export async function getLabel(id: string) {
   const label = await prisma.label.findUnique({
-    where: { id }
+    where: { id },
   });
 
   return label;
@@ -276,24 +289,24 @@ export async function getRecipesByLabel(labelId: string) {
     where: {
       labels: {
         some: {
-          labelId: labelId
-        }
-      }
+          labelId: labelId,
+        },
+      },
     },
     include: {
       ingredients: true,
       labels: {
         include: {
-          label: true
-        }
+          label: true,
+        },
       },
       user: {
         select: {
           id: true,
           name: true,
-          email: true
-        }
-      }
+          email: true,
+        },
+      },
     },
     orderBy: {
       createdAt: 'desc',
@@ -301,4 +314,4 @@ export async function getRecipesByLabel(labelId: string) {
   });
 
   return recipes;
-} 
+}

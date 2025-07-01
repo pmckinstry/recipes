@@ -46,9 +46,7 @@ export default function LabelsPage() {
   if (loading || status === 'loading') {
     return (
       <MainContent>
-        <div className="text-center">
-          Loading labels...
-        </div>
+        <div className='text-center'>Loading labels...</div>
       </MainContent>
     );
   }
@@ -56,53 +54,51 @@ export default function LabelsPage() {
   if (error) {
     return (
       <MainContent>
-        <div className="text-center text-red-600">
-          {error}
-        </div>
+        <div className='text-center text-red-600'>{error}</div>
       </MainContent>
     );
   }
 
   return (
     <MainContent>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-900">Labels</h1>
+      <div className='flex justify-between items-center mb-8'>
+        <h1 className='text-4xl font-bold text-gray-900'>Labels</h1>
         {session && (
           <Link
-            href="/labels/new"
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+            href='/labels/new'
+            className='px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700'
           >
             Add New Label
           </Link>
         )}
       </div>
-      
-      <div className="grid gap-4">
-        {labels.map((label) => (
-          <div key={label.id} className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
+
+      <div className='grid gap-4'>
+        {labels.map(label => (
+          <div key={label.id} className='bg-white rounded-lg shadow-md p-6'>
+            <div className='flex items-center justify-between'>
+              <div className='flex items-center space-x-4'>
                 <Link href={`/labels/${label.id}`}>
-                  <span 
-                    className="px-3 py-1 rounded-full text-white font-medium hover:opacity-80 transition-opacity cursor-pointer"
+                  <span
+                    className='px-3 py-1 rounded-full text-white font-medium hover:opacity-80 transition-opacity cursor-pointer'
                     style={{ backgroundColor: label.color }}
                   >
                     {label.name}
                   </span>
                 </Link>
-                <span className="text-sm text-gray-500">#{label.color}</span>
+                <span className='text-sm text-gray-500'>#{label.color}</span>
               </div>
               {session && (
-                <div className="space-x-2">
+                <div className='space-x-2'>
                   <Link
                     href={`/labels/${label.id}/edit`}
-                    className="text-indigo-600 hover:text-indigo-800"
+                    className='text-indigo-600 hover:text-indigo-800'
                   >
                     Edit
                   </Link>
                   <button
                     onClick={() => handleDelete(label.id)}
-                    className="text-red-600 hover:text-red-800"
+                    className='text-red-600 hover:text-red-800'
                   >
                     Delete
                   </button>
@@ -114,4 +110,4 @@ export default function LabelsPage() {
       </div>
     </MainContent>
   );
-} 
+}

@@ -41,4 +41,4 @@ export interface Recipe {
   user?: User;
   createdAt: Date;
   updatedAt: Date;
-} 
+}
