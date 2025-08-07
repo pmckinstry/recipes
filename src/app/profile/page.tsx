@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import MainContent from '@/components/MainContent';
 
 interface Recipe {
@@ -69,7 +70,7 @@ export default function Profile() {
     setMessage('');
 
     try {
-      const updateData: any = {};
+      const updateData: { name?: string; email?: string; newPassword?: string; currentPassword?: string } = {};
 
       // Only include fields that have changed
       if (formData.name !== session?.user?.name) {
@@ -131,7 +132,7 @@ export default function Profile() {
         const data = await response.json();
         setError(data.error || 'Failed to update profile');
       }
-    } catch (error) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
@@ -168,9 +169,11 @@ export default function Profile() {
           <div className='px-6 py-4 border-b border-gray-200'>
             <div className='flex items-center space-x-4'>
               {session?.user?.image && (
-                <img
+                <Image
                   src={session.user.image}
                   alt={session.user.name || 'Profile'}
+                  width={64}
+                  height={64}
                   className='w-16 h-16 rounded-full'
                 />
               )}
@@ -368,7 +371,7 @@ export default function Profile() {
             {userRecipes.length === 0 ? (
               <div className='text-center py-8'>
                 <p className='text-gray-500 mb-4'>
-                  You haven't created any recipes yet.
+                  You haven&apos;t created any recipes yet.
                 </p>
                 <Link
                   href='/recipes/new'

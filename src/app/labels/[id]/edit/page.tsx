@@ -31,7 +31,7 @@ export default function EditLabelPage({ params }: EditLabelPageProps) {
         } else {
           setError('Label not found');
         }
-      } catch (err) {
+      } catch {
         setError('Failed to load label');
       } finally {
         setLoading(false);
@@ -47,8 +47,8 @@ export default function EditLabelPage({ params }: EditLabelPageProps) {
     try {
       await updateLabel(id, { name, color });
       router.push('/labels');
-    } catch (err: any) {
-      setError(err.message || 'Failed to update label');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'Failed to update label');
     } finally {
       setSaving(false);
     }

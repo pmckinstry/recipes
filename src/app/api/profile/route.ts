@@ -31,7 +31,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    const updateData: any = {};
+    const updateData: { name?: string; email?: string; password?: string } = {};
 
     // Update name if provided and different
     if (name && name !== currentUser.name) {
@@ -132,7 +132,7 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const session = await auth();
 

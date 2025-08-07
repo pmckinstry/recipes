@@ -1,12 +1,12 @@
 'use client';
 
-import { signIn, getSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import MainContent from '@/components/MainContent';
 
-export default function SignIn() {
+function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState('');
@@ -40,7 +40,7 @@ export default function SignIn() {
         router.push('/recipes');
         router.refresh();
       }
-    } catch (error) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
@@ -51,7 +51,7 @@ export default function SignIn() {
     setIsLoading(true);
     try {
       await signIn('google', { callbackUrl: '/recipes' });
-    } catch (error) {
+    } catch {
       setError('An error occurred. Please try again.');
       setIsLoading(false);
     }
@@ -161,7 +161,7 @@ export default function SignIn() {
 
         <div className='mt-6 text-center'>
           <p className='text-sm text-gray-600'>
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link
               href='/auth/signup'
               className='text-indigo-600 hover:text-indigo-500'
@@ -172,5 +172,13 @@ export default function SignIn() {
         </div>
       </div>
     </MainContent>
+  );
+}
+
+export default function SignIn() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignInForm />
+    </Suspense>
   );
 }

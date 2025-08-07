@@ -2,7 +2,7 @@
 
 import { Recipe } from '@/types/recipe';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+
 import { useState, useEffect, use } from 'react';
 import { getRecipe } from '@/app/actions';
 import MainContent from '@/components/MainContent';
@@ -39,7 +39,7 @@ interface RecipePageProps {
 }
 
 export default function RecipePage({ params }: RecipePageProps) {
-  const router = useRouter();
+
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

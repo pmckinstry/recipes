@@ -185,7 +185,7 @@ describe('Label Actions', () => {
         updatedAt: new Date(),
       };
 
-      mockDeleteLabel.mockResolvedValue(deletedLabel as any);
+      mockDeleteLabel.mockResolvedValue(deletedLabel);
 
       const result = await deleteLabel('1');
 

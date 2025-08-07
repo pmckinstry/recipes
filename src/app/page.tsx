@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+
 
 export default function Home() {
   return (
@@ -13,8 +13,8 @@ export default function Home() {
           </h1>
           <p className='text-xl text-gray-600 mb-8'>
             Your personal space to discover, create, and share your favorite
-            recipes. Whether you're a seasoned chef or just starting your
-            culinary journey, we've got you covered.
+            recipes.             Whether you&apos;re a seasoned chef or just starting your
+            culinary journey, we&apos;ve got you covered.
           </p>
 
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-12'>

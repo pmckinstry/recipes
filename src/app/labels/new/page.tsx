@@ -22,8 +22,8 @@ export default function NewLabelPage() {
     try {
       await createLabel({ name, color });
       router.push('/labels');
-    } catch (err: any) {
-      setError(err.message || 'Failed to create label');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'Failed to create label');
     } finally {
       setLoading(false);
     }

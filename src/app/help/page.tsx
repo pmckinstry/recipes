@@ -23,8 +23,8 @@ export default function HelpPage() {
                   How do I add a new recipe?
                 </h3>
                 <p className='text-gray-600'>
-                  Click on the "Recipes" link in the navigation bar, then click
-                  the "Add New Recipe" button. Fill in the recipe details
+                  Click on the &quot;Recipes&quot; link in the navigation bar, then click
+                  the &quot;Add New Recipe&quot; button. Fill in the recipe details
                   including title, author, ingredients, instructions, and
                   rating.
                 </p>
@@ -34,9 +34,9 @@ export default function HelpPage() {
                   How do I edit a recipe?
                 </h3>
                 <p className='text-gray-600'>
-                  Navigate to the recipe you want to edit, then click the "Edit"
+                  Navigate to the recipe you want to edit, then click the &quot;Edit&quot;
                   button in the top right corner. Make your changes and click
-                  "Update Recipe" to save.
+                  &quot;Update Recipe&quot; to save.
                 </p>
               </div>
             </div>
@@ -50,8 +50,8 @@ export default function HelpPage() {
                   How do I delete a recipe?
                 </h3>
                 <p className='text-gray-600'>
-                  Go to the recipe you want to delete and click the "Delete"
-                  button. You'll be asked to confirm before the recipe is
+                  Go to the recipe you want to delete and click the &quot;Delete&quot;
+                  button. You&apos;ll be asked to confirm before the recipe is
                   permanently removed.
                 </p>
               </div>

@@ -1,7 +1,7 @@
 'use server';
 
 import { prisma } from '@/lib/db';
-import { Recipe, Ingredient, Label } from '@/types/recipe';
+import { Recipe, Label } from '@/types/recipe';
 import { auth } from '@/lib/auth';
 
 export async function getRecipes() {
